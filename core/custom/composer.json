@@ -1,0 +1,9 @@
+{
+    "name": "evolutioncms/custom",
+    "require": [],
+    "autoload": {
+        "psr-4": {
+            "EvolutionCMS\\Main\\": "packages/main/src/"
+        }
+    }
+}

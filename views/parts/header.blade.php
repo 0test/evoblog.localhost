@@ -2,11 +2,9 @@
 	<div class="site-name"><a href="/">Блог о всяком</a></div>
 	<nav class="links">
 		<ul>
-			<li><a href="#">Lorem</a></li>
-			<li><a href="#">Ipsum</a></li>
-			<li><a href="#">Feugiat</a></li>
-			<li><a href="#">Tempus</a></li>
-			<li><a href="#">Adipiscing</a></li>
+			@foreach ($menu[0] as $item)
+				<li><a href="{{ urlProcessor::makeUrl($item->id) }}">{{$item->pagetitle}}</a></li>
+			@endforeach
 		</ul>
 	</nav>
 	<nav class="main">

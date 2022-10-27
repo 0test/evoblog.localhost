@@ -13,7 +13,7 @@ class BlogsController extends BaseController
 			'tvList' => 'post_mainphoto',
 			'returnDLObject' => 1,
 			'paginate' => 'pages',
-			'display' => 1,
+			'display' => 10,
 			'TplPrevP' => '@CODE: <li><a href="[+link+]" class="button previous">&laquo;</a></li>',
 			'TplNextP' => '@CODE: <li><a href="[+link+]" class="button  next">&raquo;</a></li>',
 			'TplPage' => '@CODE: <li><a class="button" href="[+link+]">[+num+]</a></li>',

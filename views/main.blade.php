@@ -1,7 +1,6 @@
 @extends('layouts.app')
 
 @section('content')
-
     @foreach ($posts as $post)
     <article class="post">
         <header>

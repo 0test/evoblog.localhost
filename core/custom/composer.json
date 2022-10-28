@@ -1,6 +1,8 @@
 {
     "name": "evolutioncms/custom",
-    "require": [],
+    "require": {
+        "0test/evocms-sitemap": "*"
+    },
     "autoload": {
         "psr-4": {
             "EvolutionCMS\\Main\\": "packages/main/src/"

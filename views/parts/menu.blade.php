@@ -9,8 +9,8 @@
 	<!-- Links -->
 	<section>
 		<ul class="links">
-			@foreach ($menu[0] as $item)
-				<li><a href="{{ urlProcessor::makeUrl($item->id) }}">{{$item->pagetitle}}</a></li>
+			@foreach ($menu[1] as $item)
+				<li><a href="{{ urlProcessor::makeUrl($item['id']) }}">{{$item['pagetitle']}}</a></li>
 			@endforeach
 		</ul>
 	</section>

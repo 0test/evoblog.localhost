@@ -2,8 +2,8 @@
 	<div class="site-name"><a href="/">Блог о всяком</a></div>
 	<nav class="links">
 		<ul>
-			@foreach ($menu[0] as $item)
-				<li><a href="{{ urlProcessor::makeUrl($item->id) }}">{{$item->pagetitle}}</a></li>
+			@foreach ($menu[1] as $item)
+				<li><a href="{{ urlProcessor::makeUrl($item['id']) }}">{{$item['pagetitle']}}</a></li>
 			@endforeach
 		</ul>
 	</nav>

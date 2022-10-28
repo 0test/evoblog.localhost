@@ -3,6 +3,7 @@
 @section('content')
     @foreach ($posts as $post)
     <article class="post">
+       
         <header>
             <div class="title">
                 <h2><a href="{{ urlProcessor::makeUrl($post['id'] ) }}">{{ $post['pagetitle'] }}</a></h2>
@@ -14,9 +15,9 @@
         {{ $post['introtext'] }}
         <footer>
             <ul class="stats">
-                <li><a href="/tags/afrika" class="icon solid fa-tag">Африка</a></li>
-                <li><a href="#" class="icon solid fa-heart">28</a></li>
-                <li><a href="#" class="icon solid fa-comment">128</a></li>
+                @foreach ($post['post_tags_custom'] as $post_tag)
+                    <li><a href="{{ urlProcessor::makeUrl($post_tag['id'] ) }}" class="icon solid fa-tag">{{ $post_tag['pagetitle'] }}</a></li>
+                @endforeach
             </ul>
         </footer>
     </article>

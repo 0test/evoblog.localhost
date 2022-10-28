@@ -15,11 +15,9 @@
         </section>
         <footer>
             <ul class="stats">
-                <li><a href="/tags/afrika" class="icon solid fa-tag">Африка</a></li>
-                <li><a href="/tags/afrika" class="icon solid fa-tag">Африка</a></li>
-
-                <li><a href="#" class="icon solid fa-heart">28</a></li>
-                <li><a href="#" class="icon solid fa-comment">128</a></li>
+                @foreach ($tags as $tag)
+                    <li><a href="{{ urlProcessor::makeUrl($tag['id'] ) }}" class="icon solid fa-tag">{{ $tag['pagetitle']}}</a></li>    
+                @endforeach
             </ul>
         </footer>
     </article>

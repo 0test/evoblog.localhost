@@ -11,6 +11,7 @@
 * импортировать БД из файла `evoblog.sql`. Удалите его.
 * настроить окружение в файле `/core/custom/.env` (пример из курса в `.env.example`)
 * задать настройки в файле `/core/custom/config/cms/settings.php`  (пример из курса в `settings.php.example`)
+* сделать `composer update` в папке `core`.
 * удалите `evoblog.sql`!
 
 Логин/пароль для админки - admin/admin.

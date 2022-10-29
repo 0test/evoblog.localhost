@@ -6,6 +6,8 @@
 Создан по материалам  курса ["Уроки по созданию блога на Evolution CMS 3"
 ](https://github.com/0test/lessons-evolution-blog)
 
+
+Демо: [demoblog.kazunin.ru](http://demoblog.kazunin.ru/)
 ## Установка:
 * клонировать репозиторий
 * импортировать БД из файла `evoblog.sql`. Удалите его.

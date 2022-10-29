@@ -11,8 +11,8 @@
 		<ul>
 			<li class="search">
 				<a class="fa-search" href="#search">Поиск</a>
-				<form id="search" method="get" action="#">
-					<input type="text" name="query" placeholder="Найти" />
+				<form id="search" method="get" action="{{urlProcessor::makeUrl(26)}}">
+					<input type="text" name="search" placeholder="Найти" />
 				</form>
 			</li>
 			<li class="menu">

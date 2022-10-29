@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Хост: 127.0.0.1:3306
--- Время создания: Окт 29 2022 г., 18:23
+-- Время создания: Окт 29 2022 г., 18:49
 -- Версия сервера: 8.0.24
 -- Версия PHP: 7.4.27
 
@@ -34,14 +34,14 @@ CREATE TABLE `i6cn_active_users` (
   `lasthit` int NOT NULL DEFAULT '0',
   `action` varchar(10) NOT NULL DEFAULT '',
   `id` int DEFAULT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4;
 
 --
 -- Дамп данных таблицы `i6cn_active_users`
 --
 
 INSERT INTO `i6cn_active_users` (`sid`, `internalKey`, `username`, `lasthit`, `action`, `id`) VALUES
-('99kuu130ma8q5h429jevs7bmadob2pbv', 1, 'admin', 1667056983, '26', 0);
+('s54iq5epc4q2t97l2id4g7g4dt6qulns', 1, 'admin', 1667058402, '2', 0);
 
 -- --------------------------------------------------------
 
@@ -56,7 +56,7 @@ CREATE TABLE `i6cn_active_user_locks` (
   `elementType` int NOT NULL DEFAULT '0',
   `elementId` int NOT NULL DEFAULT '0',
   `lasthit` int NOT NULL DEFAULT '0'
-) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -69,14 +69,14 @@ CREATE TABLE `i6cn_active_user_sessions` (
   `internalKey` int NOT NULL DEFAULT '0',
   `lasthit` int NOT NULL DEFAULT '0',
   `ip` varchar(50) NOT NULL DEFAULT ''
-) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4;
 
 --
 -- Дамп данных таблицы `i6cn_active_user_sessions`
 --
 
 INSERT INTO `i6cn_active_user_sessions` (`sid`, `internalKey`, `lasthit`, `ip`) VALUES
-('99kuu130ma8q5h429jevs7bmadob2pbv', 1, 1667056983, '127.0.0.1');
+('s54iq5epc4q2t97l2id4g7g4dt6qulns', 1, 1667058402, '127.0.0.1');
 
 -- --------------------------------------------------------
 
@@ -88,7 +88,7 @@ CREATE TABLE `i6cn_categories` (
   `id` int NOT NULL,
   `category` varchar(45) NOT NULL DEFAULT '',
   `rank` int UNSIGNED NOT NULL DEFAULT '0'
-) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4;
 
 --
 -- Дамп данных таблицы `i6cn_categories`
@@ -114,7 +114,7 @@ CREATE TABLE `i6cn_documentgroup_names` (
   `name` varchar(245) NOT NULL DEFAULT '',
   `private_memgroup` int DEFAULT '0' COMMENT 'determine whether the document group is private to manager users',
   `private_webgroup` int DEFAULT '0' COMMENT 'determines whether the document is private to web users'
-) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -126,7 +126,7 @@ CREATE TABLE `i6cn_document_groups` (
   `id` int NOT NULL,
   `document_group` int NOT NULL DEFAULT '0',
   `document` int NOT NULL DEFAULT '0'
-) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -143,7 +143,7 @@ CREATE TABLE `i6cn_event_log` (
   `usertype` int NOT NULL DEFAULT '0' COMMENT '0 - manager, 1 - web',
   `source` varchar(50) NOT NULL DEFAULT '',
   `description` longtext
-) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4;
 
 --
 -- Дамп данных таблицы `i6cn_event_log`
@@ -219,7 +219,7 @@ CREATE TABLE `i6cn_manager_log` (
   `message` varchar(255) NOT NULL DEFAULT '',
   `ip` varchar(15) DEFAULT NULL,
   `useragent` varchar(255) DEFAULT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4;
 
 --
 -- Дамп данных таблицы `i6cn_manager_log`
@@ -808,7 +808,10 @@ INSERT INTO `i6cn_manager_log` (`id`, `timestamp`, `internalKey`, `username`, `a
 (578, 1667056450, 1, 'admin', 112, '2', 'ClientSettings', 'Execute module', '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/104.0.5112.124 YaBrowser/22.9.4.863 Yowser/2.5 Safari/537.36'),
 (579, 1667056601, 1, 'admin', 112, '2', 'ClientSettings', 'Execute module', '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/104.0.5112.124 YaBrowser/22.9.4.863 Yowser/2.5 Safari/537.36'),
 (580, 1667056617, 1, 'admin', 112, '2', 'ClientSettings', 'Execute module', '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/104.0.5112.124 YaBrowser/22.9.4.863 Yowser/2.5 Safari/537.36'),
-(581, 1667056984, 1, 'admin', 26, '-', '-', 'Refreshing site', '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/104.0.5112.124 YaBrowser/22.9.4.863 Yowser/2.5 Safari/537.36');
+(581, 1667056984, 1, 'admin', 26, '-', '-', 'Refreshing site', '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/104.0.5112.124 YaBrowser/22.9.4.863 Yowser/2.5 Safari/537.36'),
+(582, 1667058379, 1, 'admin', 28, '-', '-', 'Changing password', '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/104.0.5112.124 YaBrowser/22.9.4.863 Yowser/2.5 Safari/537.36'),
+(583, 1667058390, 1, 'admin', 28, '-', '-', 'Changing password', '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/104.0.5112.124 YaBrowser/22.9.4.863 Yowser/2.5 Safari/537.36'),
+(584, 1667058401, 1, 'admin', 58, '-', 'EVO', 'Logged in', '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/104.0.5112.124 YaBrowser/22.9.4.863 Yowser/2.5 Safari/537.36');
 
 -- --------------------------------------------------------
 
@@ -821,7 +824,7 @@ CREATE TABLE `i6cn_membergroup_access` (
   `membergroup` int NOT NULL DEFAULT '0',
   `documentgroup` int NOT NULL DEFAULT '0',
   `context` int NOT NULL DEFAULT '0'
-) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -832,7 +835,7 @@ CREATE TABLE `i6cn_membergroup_access` (
 CREATE TABLE `i6cn_membergroup_names` (
   `id` int NOT NULL,
   `name` varchar(245) NOT NULL DEFAULT ''
-) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -844,7 +847,7 @@ CREATE TABLE `i6cn_member_groups` (
   `id` int NOT NULL,
   `user_group` int NOT NULL DEFAULT '0',
   `member` int NOT NULL DEFAULT '0'
-) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -856,7 +859,7 @@ CREATE TABLE `i6cn_migrations_install` (
   `id` int UNSIGNED NOT NULL,
   `migration` varchar(255) NOT NULL,
   `batch` int NOT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4;
 
 --
 -- Дамп данных таблицы `i6cn_migrations_install`
@@ -938,7 +941,7 @@ CREATE TABLE `i6cn_permissions` (
   `disabled` int DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4;
 
 --
 -- Дамп данных таблицы `i6cn_permissions`
@@ -1024,7 +1027,7 @@ CREATE TABLE `i6cn_permissions_groups` (
   `lang_key` varchar(255) NOT NULL DEFAULT '',
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4;
 
 --
 -- Дамп данных таблицы `i6cn_permissions_groups`
@@ -1058,7 +1061,7 @@ CREATE TABLE `i6cn_role_permissions` (
   `role_id` int NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4;
 
 --
 -- Дамп данных таблицы `i6cn_role_permissions`
@@ -1249,7 +1252,7 @@ CREATE TABLE `i6cn_site_content` (
   `content_dispo` tinyint(1) NOT NULL DEFAULT '0' COMMENT '0-inline, 1-attachment',
   `hidemenu` tinyint(1) NOT NULL DEFAULT '0' COMMENT 'Hide document from menu',
   `alias_visible` int NOT NULL DEFAULT '1'
-) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4;
 
 --
 -- Дамп данных таблицы `i6cn_site_content`
@@ -1294,7 +1297,7 @@ CREATE TABLE `i6cn_site_content_closure` (
   `ancestor` int UNSIGNED NOT NULL,
   `descendant` int UNSIGNED NOT NULL,
   `depth` int UNSIGNED NOT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4;
 
 --
 -- Дамп данных таблицы `i6cn_site_content_closure`
@@ -1367,7 +1370,7 @@ CREATE TABLE `i6cn_site_htmlsnippets` (
   `createdon` int NOT NULL DEFAULT '0',
   `editedon` int NOT NULL DEFAULT '0',
   `disabled` tinyint(1) NOT NULL DEFAULT '0' COMMENT 'Disables the snippet'
-) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4;
 
 --
 -- Дамп данных таблицы `i6cn_site_htmlsnippets`
@@ -1400,7 +1403,7 @@ CREATE TABLE `i6cn_site_modules` (
   `enable_sharedparams` tinyint(1) NOT NULL DEFAULT '0',
   `properties` text,
   `modulecode` mediumtext COMMENT 'module boot up code'
-) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4;
 
 --
 -- Дамп данных таблицы `i6cn_site_modules`
@@ -1420,7 +1423,7 @@ CREATE TABLE `i6cn_site_module_access` (
   `id` int UNSIGNED NOT NULL,
   `module` int NOT NULL DEFAULT '0',
   `usergroup` int NOT NULL DEFAULT '0'
-) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -1433,7 +1436,7 @@ CREATE TABLE `i6cn_site_module_depobj` (
   `module` int NOT NULL DEFAULT '0',
   `resource` int NOT NULL DEFAULT '0',
   `type` int NOT NULL DEFAULT '0' COMMENT '10-chunks, 20-docs, 30-plugins, 40-snips, 50-tpls, 60-tvs'
-) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4;
 
 --
 -- Дамп данных таблицы `i6cn_site_module_depobj`
@@ -1462,7 +1465,7 @@ CREATE TABLE `i6cn_site_plugins` (
   `moduleguid` varchar(32) DEFAULT '' COMMENT 'GUID of module from which to import shared parameters',
   `createdon` int NOT NULL DEFAULT '0',
   `editedon` int NOT NULL DEFAULT '0'
-) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4;
 
 --
 -- Дамп данных таблицы `i6cn_site_plugins`
@@ -1489,7 +1492,7 @@ CREATE TABLE `i6cn_site_plugin_events` (
   `pluginid` int NOT NULL,
   `evtid` int NOT NULL DEFAULT '0',
   `priority` int NOT NULL DEFAULT '0' COMMENT 'determines plugin run order'
-) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4;
 
 --
 -- Дамп данных таблицы `i6cn_site_plugin_events`
@@ -1550,7 +1553,7 @@ CREATE TABLE `i6cn_site_snippets` (
   `createdon` int NOT NULL DEFAULT '0',
   `editedon` int NOT NULL DEFAULT '0',
   `disabled` tinyint(1) NOT NULL DEFAULT '0' COMMENT 'Disables the snippet'
-) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4;
 
 --
 -- Дамп данных таблицы `i6cn_site_snippets`
@@ -1594,7 +1597,7 @@ CREATE TABLE `i6cn_site_templates` (
   `selectable` tinyint(1) NOT NULL DEFAULT '1',
   `createdon` int NOT NULL DEFAULT '0',
   `editedon` int NOT NULL DEFAULT '0'
-) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4;
 
 --
 -- Дамп данных таблицы `i6cn_site_templates`
@@ -1634,7 +1637,7 @@ CREATE TABLE `i6cn_site_tmplvars` (
   `createdon` int NOT NULL DEFAULT '0',
   `editedon` int NOT NULL DEFAULT '0',
   `properties` text
-) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4;
 
 --
 -- Дамп данных таблицы `i6cn_site_tmplvars`
@@ -1659,7 +1662,7 @@ CREATE TABLE `i6cn_site_tmplvar_access` (
   `id` int NOT NULL,
   `tmplvarid` int NOT NULL DEFAULT '0',
   `documentgroup` int NOT NULL DEFAULT '0'
-) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -1672,7 +1675,7 @@ CREATE TABLE `i6cn_site_tmplvar_contentvalues` (
   `tmplvarid` int NOT NULL DEFAULT '0' COMMENT 'Template Variable id',
   `contentid` int NOT NULL DEFAULT '0' COMMENT 'Site Content Id',
   `value` mediumtext
-) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4;
 
 --
 -- Дамп данных таблицы `i6cn_site_tmplvar_contentvalues`
@@ -1743,7 +1746,7 @@ CREATE TABLE `i6cn_site_tmplvar_templates` (
   `tmplvarid` int NOT NULL DEFAULT '0' COMMENT 'Template Variable id',
   `templateid` int NOT NULL DEFAULT '0',
   `rank` int NOT NULL DEFAULT '0'
-) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4;
 
 --
 -- Дамп данных таблицы `i6cn_site_tmplvar_templates`
@@ -1805,7 +1808,7 @@ CREATE TABLE `i6cn_system_eventnames` (
   `name` varchar(50) NOT NULL DEFAULT '',
   `service` int NOT NULL DEFAULT '0' COMMENT 'System Service number',
   `groupname` varchar(20) NOT NULL DEFAULT ''
-) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4;
 
 --
 -- Дамп данных таблицы `i6cn_system_eventnames`
@@ -1964,7 +1967,7 @@ INSERT INTO `i6cn_system_eventnames` (`id`, `name`, `service`, `groupname`) VALU
 CREATE TABLE `i6cn_system_settings` (
   `setting_name` varchar(50) NOT NULL DEFAULT '',
   `setting_value` text
-) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4;
 
 --
 -- Дамп данных таблицы `i6cn_system_settings`
@@ -2150,14 +2153,14 @@ CREATE TABLE `i6cn_users` (
   `access_token` varchar(255) DEFAULT NULL,
   `valid_to` timestamp NULL DEFAULT NULL,
   `verified_key` varchar(255) DEFAULT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4;
 
 --
 -- Дамп данных таблицы `i6cn_users`
 --
 
 INSERT INTO `i6cn_users` (`id`, `username`, `password`, `cachepwd`, `refresh_token`, `access_token`, `valid_to`, `verified_key`) VALUES
-(1, 'admin', '$P$BjbEatuDPd5wdVR6uLDAGe1FwwLrsy/', '', '38f0c92c2ed2c0c055975acde14142c316acd986c04376cdcc06056945de1082', '70557e1c505ab4a920f9363f0e2003ce1cd27e95a73fa61e8a42696e9f0c5504', '2022-10-27 21:15:48', NULL);
+(1, 'admin', '$P$BjbEatuDPd5wdVR6uLDAGe1FwwLrsy/', '', '80fe295a626a1bdec23f088156e9b7fc92982d9e7a8acef69161b12ef967f456', '0e56be3a10c92062f12254999ec38ad7581e767714a8555863abb09db5e728a3', '2022-10-30 02:46:41', NULL);
 
 -- --------------------------------------------------------
 
@@ -2197,14 +2200,14 @@ CREATE TABLE `i6cn_user_attributes` (
   `createdon` int NOT NULL DEFAULT '0',
   `editedon` int NOT NULL DEFAULT '0',
   `verified` tinyint NOT NULL DEFAULT '0'
-) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4;
 
 --
 -- Дамп данных таблицы `i6cn_user_attributes`
 --
 
 INSERT INTO `i6cn_user_attributes` (`id`, `internalKey`, `fullname`, `first_name`, `last_name`, `middle_name`, `role`, `email`, `phone`, `mobilephone`, `blocked`, `blockeduntil`, `blockedafter`, `logincount`, `lastlogin`, `thislogin`, `failedlogincount`, `sessionid`, `dob`, `gender`, `country`, `street`, `city`, `state`, `zip`, `fax`, `photo`, `comment`, `createdon`, `editedon`, `verified`) VALUES
-(1, 1, '1', NULL, NULL, NULL, 1, 'admin@evoblog.localhost', '', '', 0, 0, 0, 3, 1666865748, 1666865748, 0, '1', 0, 0, '', '', '', '', '', '', '', NULL, 1666264537, 1666865748, 1);
+(1, 1, '1', NULL, NULL, NULL, 1, 'admin@evoblog.localhost', '', '', 0, 0, 0, 4, 1667058401, 1667058401, 0, '1', 0, 0, '', '', '', '', '', '', '', NULL, 1666264537, 1667058401, 1);
 
 -- --------------------------------------------------------
 
@@ -2216,7 +2219,7 @@ CREATE TABLE `i6cn_user_roles` (
   `id` int NOT NULL,
   `name` varchar(50) NOT NULL DEFAULT '',
   `description` varchar(255) NOT NULL DEFAULT ''
-) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4;
 
 --
 -- Дамп данных таблицы `i6cn_user_roles`
@@ -2237,7 +2240,7 @@ CREATE TABLE `i6cn_user_role_vars` (
   `tmplvarid` int NOT NULL DEFAULT '0',
   `roleid` int NOT NULL DEFAULT '0',
   `rank` int NOT NULL DEFAULT '0'
-) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -2249,7 +2252,7 @@ CREATE TABLE `i6cn_user_settings` (
   `user` int NOT NULL,
   `setting_name` varchar(50) NOT NULL DEFAULT '',
   `setting_value` text
-) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -2262,7 +2265,7 @@ CREATE TABLE `i6cn_user_values` (
   `tmplvarid` int NOT NULL DEFAULT '0',
   `userid` int NOT NULL DEFAULT '0',
   `value` mediumtext
-) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4;
 
 --
 -- Индексы сохранённых таблиц
@@ -2535,7 +2538,7 @@ ALTER TABLE `i6cn_user_values`
 -- AUTO_INCREMENT для таблицы `i6cn_active_user_locks`
 --
 ALTER TABLE `i6cn_active_user_locks`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT для таблицы `i6cn_categories`
@@ -2571,7 +2574,7 @@ ALTER TABLE `i6cn_evosearch_table`
 -- AUTO_INCREMENT для таблицы `i6cn_manager_log`
 --
 ALTER TABLE `i6cn_manager_log`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=582;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=585;
 
 --
 -- AUTO_INCREMENT для таблицы `i6cn_membergroup_access`

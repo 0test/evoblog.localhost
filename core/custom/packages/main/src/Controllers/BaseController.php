@@ -19,7 +19,8 @@ class BaseController
 			'maxDepth' => 1,
 			'returnDLObject' => 1
 		]);
-		$this->data['menu'] = $menu->getDocs();
+		$this->data['menu'] = $menu->getMenu();
+
 
 		$result = $this->evo->runSnippet('DocLister',[
 			'parents' => 2,

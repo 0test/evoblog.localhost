@@ -1,7 +1,8 @@
 {
     "name": "evolutioncms/custom",
     "require": {
-        "0test/evocms-sitemap": "*"
+        "0test/evocms-sitemap": "*",
+        "evolution-cms-extras/tinymce5": "5.7.1"
     },
     "autoload": {
         "psr-4": {

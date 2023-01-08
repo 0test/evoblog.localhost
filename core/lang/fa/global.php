@@ -126,7 +126,7 @@ $_lang["configcheck_errorpage_unavailable"] = 'صفحه ی ارور وبگاه �
 $_lang["configcheck_errorpage_unavailable_msg"] = 'به این معنی که صفحه ی ارور شما برای بازدیدکنندگان وبگاه شما قابل دسترس یا موجود نیست. این مسئله منجر به ارورهای دیگر و مشکلات عدیده ی دیگر در وبگاه شما خواهد شد. لطفا از این موضوع اطمینان حاصل کنید که هیچ گروه کاربری به این فایل دسترسی ندارد.';
 $_lang["configcheck_errorpage_unpublished"] = 'صفحه ی ارور وبگاه شما همچنان منتشر نشده یا وجود ندارد.';
 $_lang["configcheck_errorpage_unpublished_msg"] = 'این یعنی صفحه ی ارور شما قابل دسترسی برای عموم نیست. صفحه را منتشر کنید و یا از این موضوع اطمینان حاصل کنید این به پرونده ای موجود در وبگاه شما تعیین شده است با مراجعه به بخش ابزار و تنظیمات.';
-$_lang["configcheck_filemanager_path"] = 'The currently set <a href="index.php?a=17&tab=5">File Manager path</a> seems incorrect.';
+$_lang["configcheck_filemanager_path"] = 'The currently set <a href="index.php?a=17&tab=4">File Manager path</a> seems incorrect.';
 $_lang["configcheck_filemanager_path_msg"] = 'This can happen for example by moving your installation to a different directory or server. Please check and update your Evolution CMS configuration.';
 $_lang["configcheck_hide_warning"] = '<a href="javascript:hideConfigCheckWarning(\'%s\');"><em>Don\'t show this again.</em></a>';
 $_lang["configcheck_images"] = 'پرونده ی تصاویر قابل نگارش نمی باشد.';
@@ -139,7 +139,7 @@ $_lang["configcheck_notok"] = 'یک یا چند مورد از تنظیمات ب�
 $_lang["configcheck_ok"] = 'آزمایش موفقیت آمیز بود - هیچ خطایی برای گزارش یافت نشد.';
 $_lang["configcheck_php_gdzip"] = 'GD and/or Zip PHP extensions not found';
 $_lang["configcheck_php_gdzip_msg"] = 'Evolution CMS needs the GD and Zip extension enabled for PHP. While Evolution CMS will work without them, you will not be able to take full advantage of the built-in File Manager, Image Editor or Captcha for logins.';
-$_lang["configcheck_rb_base_dir"] = 'The currently set <a href="index.php?a=17&tab=6">File base path</a> seems incorrect.';
+$_lang["configcheck_rb_base_dir"] = 'The currently set <a href="index.php?a=17&tab=5">File Browser path</a> seems incorrect.';
 $_lang["configcheck_rb_base_dir_msg"] = 'This can happen for example by moving your installation to a different directory or server. Please check and update your Evolution CMS configuration.';
 $_lang["configcheck_register_globals"] = 'رجیستر_گلوبال در تنظیمات فایل اصلی PHP سرور میزبان روشن می باشد';
 $_lang["configcheck_register_globals_msg"] = ' این تنظیمات وبگاه شما را در مقابل حملات کراس سایت اسکریپتها آسیب پذیر میکند. شما بایستی برای رفع این مورد با پشتیبانی سرور میزبان خود تماس بگیرید.';
@@ -156,6 +156,7 @@ $_lang["configcheck_validate_referer"] = 'Security Warning: HTTP Header Validati
 $_lang["configcheck_validate_referer_msg"] = 'The configuration setting <strong>Validate HTTP_REFERER headers?</strong> is Off. We recommend turning it On. <a href="index.php?a=17">Go to Configuration options</a>';
 $_lang["configcheck_warning"] = 'خطای تنظیمات:';
 $_lang["configcheck_what"] = 'معنای این چیست؟';
+$_lang["safe_mode_warning"] = 'Safe mode is enabled. Manager functionality is limited.';
 $_lang["confirm_block"] = 'آیا از ممنوعیت و تعلیق این کاربر اطمینان دارید؟';
 $_lang["confirm_delete_category"] = 'Are you sure you want to delete this category?';
 $_lang["confirm_delete_eventlog"] = 'آثا از حذف آمار این فعالیت اطمینان دارید؟';
@@ -408,7 +409,6 @@ $_lang["update_tree_description"] = '<ul>
                      </ul>';
 $_lang["update_tree_danger"] = 'If you have more than 1000 resources, it is better to perform this operation in CLI mode using the \'php artisan closuretable: rebuild command\'';
 $_lang["update_tree_time"] = 'Rebuild tree finished. Documents processed: <b>%s</b><br>Import took <b>%s</b> seconds to complete.';
-$_lang["inbox"] = 'صندوق';
 $_lang["info"] = 'مشخصات';
 $_lang["information"] = 'اطلاعات';
 $_lang["inline"] = 'این لاین یا داخل صفحه';
@@ -476,8 +476,6 @@ $_lang["login_message"] = 'لطفا برای ورود به بخش مدیریت �
 $_lang["logo_slogan"] = 'مدیریت محتوای مادایکس - \nبا حداقل امکان بسازید بلکه برتر از آن';
 $_lang["logout"] = 'خروج از سیستم';
 $_lang["long_title"] = 'عنوان بلند';
-$_lang["mail_check_timeperiod_message"] = 'بازه ی زمانی را برای چک کردن پیغامهای ایمیل در بخش مدیریت مشخص کنید, (به ثانیه).';
-$_lang["mail_check_timeperiod_title"] = 'بازه ی زمانی چک کردن ایمیل:';
 $_lang["manage_depends"] = 'مدیریت متعلقات';
 $_lang["manage_files"] = 'مدیریت فایلها';
 $_lang["manage_htmlsnippets"] = 'چانک ها';
@@ -590,8 +588,6 @@ $_lang["no_records_found"] = 'هیچ داده ای یافت نشد..';
 $_lang["no_results"] = 'نتیجه ای در بر نداشت';
 $_lang["nologentries_message"] = 'تعداد اطلاعات ثبت شده که در یک صفحه نمایش داده می شود را مشخص کنید.';
 $_lang["nologentries_title"] = 'تعداد دفعات ورود :';
-$_lang["nomessages_message"] = 'تعداد پیغامهایی که در صندوق نمایش داده میشوند را مشخص کنید';
-$_lang["nomessages_title"] = 'تعداد پیغامها :';
 $_lang["none"] = 'هیچکدام';
 $_lang["noresults_message"] = 'تعداد نتایج و موارد را برای نمایش در فهرست نتایج جستجو ارائه می شود را وارد کنید.';
 $_lang["noresults_title"] = 'تعداد نتایج :';
@@ -1192,7 +1188,6 @@ $_lang["websignupemail_title"] = 'آدرس پست الکترونیک عضویت 
 $_lang["allow_multiple_emails_title"] = 'Duplicate Web User email address';
 $_lang["allow_multiple_emails_message"] = 'Allows Web Users to share the same email address for situations when a member may not have their own email address or there is just one family email address.<br/>Note: Any password reminder and registration logic will need to account for this option if set to yes.';
 $_lang["wednesday"] = 'چهارشنبه';
-$_lang["welcome_messages"] = 'صندوق نامه شما حاوی <strong>%d</strong> نامه میباشد که تعداد <strong>%s</strong> نامه تازه رسیده یا باز نشده.';
 $_lang["welcome_title"] = 'به سیستم مدیریت محتوای وبگاه مادایکس خود خوش آمدید';
 $_lang["which_editor_message"] = 'در اینجا شما میتوانید "ویرایشگر متن "مورد نظر خود را برای استفاده خود انتخاب کنید. همچنین شما میتوانید ویرایشگر متون مختلفی را در بخش دانلود مادایکس تهیه و نصب کنید';
 $_lang["which_editor_title"] = 'انتخاب ویرایشگر :';
@@ -1301,9 +1296,12 @@ $_lang["cache_type_1"] = 'Cache is based only on Resource ID (standard)';
 $_lang["cache_type_2"] = 'Cache is based on Resource ID and $_GET parameters';
 $_lang["seostrict_title"] = 'Use SEO Strict URLs';
 $_lang["seostrict_message"] = 'Enforces the use of strict URLs to prevent duplicate content (if needed)';
-$_lang["aliaslistingfolder_title"] = 'Use AliasListing only for Folders';
-$_lang["full_aliaslisting_title"] = 'Disable AliasListing for all resources';
-$_lang["aliaslistingfolder_message"] = 'Reduces memory consumption when a large number of resources';
+
+$_lang["alias_listing_title"] = 'Use AliasListing cache';
+$_lang["alias_listing_message"] = 'Caching page aliases, have to be disabled if a site have huge amount of resources. "Disabled" reduces memory consumption when site have large number of resources.';
+$_lang["alias_listing_disabled"] = 'Disabled';
+$_lang["alias_listing_folders"] = 'Only for folders';
+$_lang["alias_listing_enabled"] = 'Enabled';
 
 $_lang["settings_friendlyurls_alert"] = 'It is necessary to rename the ht.access file in the Evolution CMS installation directory at .htaccess to use the Friendly URL function.';
 $_lang["settings_friendlyurls_alert2"] = 'Since Evolution CMS was installed in a subdirectory, it is necessary to change the content of .htaccess.';
@@ -1316,39 +1314,39 @@ $_lang["mutate_settings.dynamic.php6"] = 'Send mail on Evolution CMS errors';
 $_lang["mutate_settings.dynamic.php7"] = 'not notify';
 $_lang["mutate_settings.dynamic.php8"] = 'A mail with the error source will be sent to [(emailsender)] ([+emailsender+]) if a Evolution CMS error occurs. The details of the error could be seen in the Evolution CMS events log.';
 
-$_lang["error_no_privileges"]         = "You don't have enough privileges for this action!";
+$_lang["error_no_privileges"] = "You don't have enough privileges for this action!";
 $_lang["error_no_optimise_tablename"] = "Table to optimise not found in request!";
 $_lang["error_no_truncate_tablename"] = "Table to truncate not found in request!";
-$_lang["error_double_action"]         = "Double action (GET & POST) posted!";
-$_lang["error_no_id"]                 = "ID not passed in request!";
-$_lang["error_id_nan"]                = "ID passed in request is NaN!";
-$_lang["error_parent_deleted"]        = "Failed because resource parent is deleted!";
-$_lang["error_no_parent"]             = "Couldn't find parent document's name!";
-$_lang["error_many_results"]          = "Too many results returned from database!";
-$_lang["error_no_results"]            = "Not enough/ no results returned from database!";
-$_lang["error_no_user_selected"]      = "No user selected as recipient of this message!";
-$_lang["error_no_group_selected"]     = "No group selected as recipient of this message!";
-$_lang["error_movedocument1"]         = "Document cannot be it's own parent!";
-$_lang["error_movedocument2"]         = "Document's ID not passed in request!";
-$_lang["error_movedocument3"]         = "New parent not set in request!";
-$_lang["error_internet_connection"]   = "Server isn't available. Check your internet connection!";
+$_lang["error_double_action"] = "Double action (GET & POST) posted!";
+$_lang["error_no_id"] = "ID not passed in request!";
+$_lang["error_id_nan"] = "ID passed in request is NaN!";
+$_lang["error_parent_deleted"] = "Failed because resource parent is deleted!";
+$_lang["error_no_parent"] = "Couldn't find parent document's name!";
+$_lang["error_many_results"] = "Too many results returned from database!";
+$_lang["error_no_results"] = "Not enough/ no results returned from database!";
+$_lang["error_no_user_selected"] = "No user selected as recipient of this message!";
+$_lang["error_no_group_selected"] = "No group selected as recipient of this message!";
+$_lang["error_movedocument1"] = "Document cannot be it's own parent!";
+$_lang["error_movedocument2"] = "Document's ID not passed in request!";
+$_lang["error_movedocument3"] = "New parent not set in request!";
+$_lang["error_internet_connection"] = "Server isn't available. Check your internet connection!";
 
-$_lang["login_processor_unknown_user"]       = "Incorrect username or password entered!";
-$_lang["login_processor_wrong_password"]     = "Incorrect username or password entered!";
+$_lang["login_processor_unknown_user"] = "Incorrect username or password entered!";
+$_lang["login_processor_wrong_password"] = "Incorrect username or password entered!";
 $_lang["login_processor_many_failed_logins"] = "Due to too many failed logins, you have been blocked!";
-$_lang["login_processor_verified"]           = "User verification required!";
-$_lang["login_processor_blocked1"]           = "You are blocked and cannot log in!";
-$_lang["login_processor_blocked2"]           = "You are blocked and cannot log in! Please try again later.";
-$_lang["login_processor_blocked3"]           = "You are blocked automatic after a specified date and you cannot log in anymore!";
-$_lang["login_processor_bad_code"]           = "The security code you entered didn't validate! Please try to login again!";
-$_lang["login_processor_remotehost_ip"]      = "Your hostname doesn't point back to your IP!";
-$_lang["login_processor_remote_ip"]          = "You are not allowed to login from this location.";
-$_lang["login_processor_date"]               = "You are not allowed to login at this time. Please try again later.";
-$_lang["login_processor_captcha_config"]     = "Captcha is not configured properly.";
+$_lang["login_processor_verified"] = "User verification required!";
+$_lang["login_processor_blocked1"] = "You are blocked and cannot log in!";
+$_lang["login_processor_blocked2"] = "You are blocked and cannot log in! Please try again later.";
+$_lang["login_processor_blocked3"] = "You are blocked automatic after a specified date and you cannot log in anymore!";
+$_lang["login_processor_bad_code"] = "The security code you entered didn't validate! Please try to login again!";
+$_lang["login_processor_remotehost_ip"] = "Your hostname doesn't point back to your IP!";
+$_lang["login_processor_remote_ip"] = "You are not allowed to login from this location.";
+$_lang["login_processor_date"] = "You are not allowed to login at this time. Please try again later.";
+$_lang["login_processor_captcha_config"] = "Captcha is not configured properly.";
 
-$_lang["dp_dayNames"]   = "['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']";
+$_lang["dp_dayNames"] = "['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']";
 $_lang["dp_monthNames"] = "['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']";
-$_lang["dp_startDay"]   = "1";
+$_lang["dp_startDay"] = "1";
 
 $_lang["check_all"] = "Select all";
 $_lang["check_none"] = "Select none";
@@ -1362,10 +1360,10 @@ $_lang["reset_sysfiles_checksum_button"] = "Rebuild Checksums";
 $_lang["reset_sysfiles_checksum_alert"] = "Are you sure you want to reset the system files checksums?";
 
 $_lang["file_browser_disabled_msg"] = "The File Browser Feature is not enabled.";
-$_lang["which_browser_default_title"]= "Default File Browser";
-$_lang["which_browser_default_msg"]= "Choose the File Browser you prefer as default. In User-Settings you can choose a Custom Browser per User, or leave it on &quot;default&quot;.";
-$_lang["which_browser_title"]= "File Browser";
-$_lang["which_browser_msg"]= "You can choose a custom File Browser for this user. To use the System´s default Browser, leave it on &quot;Default&quot;.";
+$_lang["which_browser_default_title"] = "Default File Browser";
+$_lang["which_browser_default_msg"] = "Choose the File Browser you prefer as default. In User-Settings you can choose a Custom Browser per User, or leave it on &quot;default&quot;.";
+$_lang["which_browser_title"] = "File Browser";
+$_lang["which_browser_msg"] = "You can choose a custom File Browser for this user. To use the System´s default Browser, leave it on &quot;Default&quot;.";
 $_lang["option_default"] = "Default";
 $_lang["position"] = "Position";
 $_lang["are_you_sure"] = "Are you sure?";
@@ -1380,7 +1378,7 @@ $_lang["extras"] = "Extras";
 $_lang["display_locks"] = "Display Locks";
 $_lang["role_display_locks"] = "Display Locks";
 $_lang["session_timeout"] = "Session Timeout";
-$_lang["session_timeout_msg"] = "Evolution CMS will ping the server as per setting &quot;Mail Check Time Period&quot;. If the last ping exceeds this setting, the associated session will be considered invalid and all related locks will be removed automatically. Set value in minutes (>2min, default 15min).";
+$_lang["session_timeout_msg"] = "Evolution CMS will ping the server, if the last ping exceeds this setting, the associated session will be considered invalid and all related locks will be removed automatically. Set value in minutes (>2min, default 15min).";
 $_lang["unlock_element_id_warning"] = "Are you sure you want to unlock this [+element_type+] (ID [+id+])?";
 $_lang["lock_element_type_1"] = "Template";
 $_lang["lock_element_type_2"] = "Template-Variable";
@@ -1398,18 +1396,18 @@ $_lang["minifyphp_incache_message"] = 'Minify php code (snippets and plugins) an
 
 $_lang["logout_reminder_msg"] = "Reminder: It seems on [+date+] you forgot to logout. Please pay attention in future to do so after your work is finished.";
 
-$_lang["allow_eval_title"]             = "Eval php code in snippet call";
-$_lang["allow_eval_msg"]               = "For developer : Please use \$modx-&gt;safeEval().";
-$_lang["allow_eval_with_scan"]         = "Execute only permitted functions";
+$_lang["allow_eval_title"] = "Eval php code in snippet call";
+$_lang["allow_eval_msg"] = "For developer : Please use \$modx-&gt;safeEval().";
+$_lang["allow_eval_with_scan"] = "Execute only permitted functions";
 $_lang["allow_eval_with_scan_at_post"] = "Execute all. However, at POST, only permitted functions";
-$_lang["allow_eval_everytime_eval"]    = "Unlimited (Use only for debugging)";
-$_lang["allow_eval_dont_eval"]         = "Do not allow all functions";
+$_lang["allow_eval_everytime_eval"] = "Unlimited (Use only for debugging)";
+$_lang["allow_eval_dont_eval"] = "Do not allow all functions";
 
 $_lang["safe_functions_at_eval_title"] = "Functions to allow eval";
-$_lang["safe_functions_at_eval_msg"]   = "Comma separated list";
+$_lang["safe_functions_at_eval_msg"] = "Comma separated list";
 
-$_lang["multiple_sessions_msg"]   = "Information: Multiple active user sessions (total [+total+]) found for user <b>[+username+]</b>.";
-$_lang["iconv_not_available"]     = "It is important to install/enable extension iconv. Please speak to your host if you don´t know how to enable it.";
+$_lang["multiple_sessions_msg"] = "Information: Multiple active user sessions (total [+total+]) found for user <b>[+username+]</b>.";
+$_lang["iconv_not_available"] = "It is important to install/enable extension iconv. Please speak to your host if you don´t know how to enable it.";
 
 $_lang["cm_create_new_category"] = "Create the new category";
 $_lang["cm_category_name"] = "Category name";

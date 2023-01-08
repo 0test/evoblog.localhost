@@ -29,10 +29,6 @@
 }
 #euiUploadState .sgrow3 {
     text-align: center;
-    overflow: visible;
-    display: block;
-    background: none;
-    height: auto;
 }
 #euiUploadState .progress .complete {
     color:green;

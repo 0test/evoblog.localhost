@@ -100,7 +100,7 @@ class Parser
      */
     public function setTemplatePath ($path, $supRoot = false)
     {
-        $path = trim($path);
+        $path = trim($path ?? '');
         if ($supRoot === false) {
             $path = $this->cleanPath($path);
         }
@@ -142,7 +142,7 @@ class Parser
      */
     public function setTemplateExtension ($ext)
     {
-        $ext = $this->cleanPath(trim($ext, ". \t\n\r\0\x0B"));
+        $ext = $this->cleanPath(trim($ext ?? '', ". \t\n\r\0\x0B"));
 
         if (!empty($ext)) {
             $this->templateExtension = $ext;
@@ -332,7 +332,7 @@ class Parser
     public function getBaseChunk ($name)
     {
         if (empty($name)) {
-            return null;
+            return '';
         }
 
         if (array_key_exists($name, $this->modx->chunkCache)) {
@@ -343,7 +343,7 @@ class Parser
                 ->where('disabled', '=', 0)
                 ->get();
 
-            $tpl = ($chunk->count() === 1) ? $chunk->first()->snippet : null;
+            $tpl = ($chunk->count() === 1) ? $chunk->first()->snippet : '';
             $this->modx->chunkCache[$name] = $tpl;
         }
 

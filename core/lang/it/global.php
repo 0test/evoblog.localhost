@@ -126,7 +126,7 @@ $_lang["configcheck_errorpage_unavailable"] = 'La pagina di Errore del vostro si
 $_lang["configcheck_errorpage_unavailable_msg"] = 'Ciò significa che la pagina di Errore non esiste o non è accessibile da parte dei normali visitatori web. Questo può generare un loop ricorsivo e scrivere numerosi errori nel log del vostro sito. Verificate che non ci siano Gruppi di Utenti Web assegnati a questa pagina.';
 $_lang["configcheck_errorpage_unpublished"] = 'La pagina di Errore del vostro sito non esiste o non è stata pubblicata.';
 $_lang["configcheck_errorpage_unpublished_msg"] = 'Ciò significa che la pagina di Errore non è accessibile da parte del pubblico. Pubblicate la pagina o selezionate una Risorsa esistente nella struttura ad albero del vostro sito dal menu Strumenti -> Configurazione.';
-$_lang["configcheck_filemanager_path"] = 'L\'impostazione <a href="index.php?a=17&tab=5">File Manager path</a> sembra errata.';
+$_lang["configcheck_filemanager_path"] = 'L\'impostazione <a href="/[+MGR_DIR+]/?a=17&amp;tab=4">File Manager path</a> sembra errata.';
 $_lang["configcheck_filemanager_path_msg"] = 'Questo può accadere, per esempio, quando si sposta l\'installazione di EVO in una differente cartella o server. Per favore, controlla e aggiorna la configurazione di sistema di EVO.';
 $_lang["configcheck_hide_warning"] = '<a href="javascript:hideConfigCheckWarning(\'%s\');"><em>Non mostrare più questo messaggio.</em></a>';
 $_lang["configcheck_images"] = 'Impossibile scrivere nella directory delle immagini';
@@ -139,7 +139,7 @@ $_lang["configcheck_notok"] = 'Verificare alcuni dettagli della configurazione: 
 $_lang["configcheck_ok"] = 'Controllo OK - Nessun avviso da segnalare.';
 $_lang["configcheck_php_gdzip"] = 'Le estensioni PHP GD e/o Zip non sono state trovate';
 $_lang["configcheck_php_gdzip_msg"] = 'EVO richiede le estensioni PHP GD e Zip. EVO funziona anche senza, ma non potrete utilizzare File Manager, Image Editor e Captcha.';
-$_lang["configcheck_rb_base_dir"] = 'L\'impostazione <a href="index.php?a=17&tab=6">File base path</a> sembra errata.';
+$_lang["configcheck_rb_base_dir"] = 'L\'impostazione <a href="/[+MGR_DIR+]/?a=17&amp;tab=5">File base path</a> sembra errata.';
 $_lang["configcheck_rb_base_dir_msg"] = 'Questo può accadere, per esempio, quando si sposta l\'installazione di EVO in una differente cartella o server. Per favore, controlla e aggiorna la configurazione di sistema di EVO.';
 $_lang["configcheck_register_globals"] = 'Nel vostro file di configurazione php.ini, il valore register_globals è impostato su ON';
 $_lang["configcheck_register_globals_msg"] = 'Questa configurazione rende il vostro sito molto più suscettibile agli attacchi di Cross Site Scripting (XSS). Contattate il vostro fornitore di hosting per capire cosa si può fare per disabilitare questa impostazione.';
@@ -156,6 +156,7 @@ $_lang["configcheck_validate_referer"] = 'Avviso di Sicurezza: Validazione heade
 $_lang["configcheck_validate_referer_msg"] = 'L\'opzione di <strong>Validazione degli headers HTTP_REFERER?</strong> non è attivata. Raccomandiamo di attivarla. <a href="index.php?a=17">Vai alle Opzioni di Configurazione</a>';
 $_lang["configcheck_warning"] = 'Avviso di configurazione:';
 $_lang["configcheck_what"] = 'Che cosa significa?';
+$_lang["safe_mode_warning"] = 'Safe mode is enabled. Manager functionality is limited.';
 $_lang["confirm_block"] = 'Siete sicuri di voler bloccare l\'utente?';
 $_lang["confirm_delete_category"] = 'Sei sicuro di voler cancellare questa categoria?';
 $_lang["confirm_delete_eventlog"] = 'Siete sicuri di voler cancellare questo log?';
@@ -408,7 +409,6 @@ $_lang["update_tree_description"] = '<ul>
                      </ul>';
 $_lang["update_tree_danger"] = 'If you have more than 1000 resources, it is better to perform this operation in CLI mode using the \'php artisan closuretable: rebuild command\'';
 $_lang["update_tree_time"] = 'Rebuild tree finished. Documents processed: <b>%s</b><br>Import took <b>%s</b> seconds to complete.';
-$_lang["inbox"] = 'Inbox';
 $_lang["info"] = 'Info';
 $_lang["information"] = 'Informazioni';
 $_lang["inline"] = 'In linea';
@@ -476,8 +476,6 @@ $_lang["login_message"] = 'Inserisci le tue credenziali per effettuare l\'access
 $_lang["logo_slogan"] = 'Sistema di gestione dei contenuti EVO - \nCreate e fate di più con meno';
 $_lang["logout"] = 'Uscita';
 $_lang["long_title"] = 'Titolo esteso';
-$_lang["mail_check_timeperiod_message"] = 'Intervallo di tempo dopo il quale controllare se ci sono nuovi messaggi nel Manager, in secondi.';
-$_lang["mail_check_timeperiod_title"] = 'Frequenza di controllo messaggi:';
 $_lang["manage_depends"] = 'Configurazione Dipendenze';
 $_lang["manage_files"] = 'Gestione File';
 $_lang["manage_htmlsnippets"] = 'Chunks';
@@ -590,8 +588,6 @@ $_lang["no_records_found"] = 'Nessun record.';
 $_lang["no_results"] = 'Nessun risultato trovato';
 $_lang["nologentries_message"] = 'Inserite il numero di righe da visualizzare per pagina quando visualizzate i logs.';
 $_lang["nologentries_title"] = 'Numero di voci di log:';
-$_lang["nomessages_message"] = 'Inserite il numero di messaggi da visualizzare nella inbox quando leggete i messaggi.';
-$_lang["nomessages_title"] = 'Numero di messaggi:';
 $_lang["none"] = 'Nessuno';
 $_lang["noresults_message"] = 'Inserite il numero di risultati da mostrare negli elenchi ed i risultati di ricerca .';
 $_lang["noresults_title"] = 'Numero di risultati:';
@@ -1204,7 +1200,6 @@ $_lang["websignupemail_title"] = 'Indirizzo E-mail di registrazione:';
 $_lang["allow_multiple_emails_title"] = 'Indirizzo email duplicato per l\'Utente Web';
 $_lang["allow_multiple_emails_message"] = 'Consente agli Utenti Web di condividere lo stesso indirizzo email, ad esempio quando un utente non ha un suo indirizzo email o tutti usano un solo indirizzo familiare.<br/>Nota: se si imposta questa opzione occorre tenerne conto nella registrazione o recupero della password.';
 $_lang["wednesday"] = 'Mercoledì';
-$_lang["welcome_messages"] = 'La vostra inbox contiene <b>%d</b> messaggi(o), di cui <b>%s</b> non letto/i.';
 $_lang["welcome_title"] = 'Benvenuto nel sistema di gestione dei contenuti EVO';
 $_lang["which_editor_message"] = 'Qui potete selezionare quale editor rich text preferite usare. Potete scaricare ed installare altri editor dalla sezione downloads del sito EVO ';
 $_lang["which_editor_title"] = 'Editor da usare:';
@@ -1313,9 +1308,12 @@ $_lang["cache_type_1"] = 'La cache si basa solo sull\'ID della Risorsa (standard
 $_lang["cache_type_2"] = 'La cache si basa sull\'ID della risorsa e sui parametri $_GET';
 $_lang["seostrict_title"] = 'Usa URL univoci:';
 $_lang["seostrict_message"] = 'Forza l\'uso di URL SEO univoche per prevenire contenuti duplicati (se necessario)';
-$_lang["aliaslistingfolder_title"] = 'Usa AliasListing solo per le cartelle';
-$_lang["full_aliaslisting_title"] = 'Disable AliasListing for all resources';
-$_lang["aliaslistingfolder_message"] = 'Riduce il consumo di memoria quando si ha un gran numero di risorse';
+
+$_lang["alias_listing_title"] = 'Use AliasListing cache';
+$_lang["alias_listing_message"] = 'Caching page aliases, have to be disabled if a site have huge amount of resources. "Disabled" reduces memory consumption when site have large number of resources.';
+$_lang["alias_listing_disabled"] = 'Disabled';
+$_lang["alias_listing_folders"] = 'Only for folders';
+$_lang["alias_listing_enabled"] = 'Enabled';
 
 $_lang["settings_friendlyurls_alert"] = 'E\' necessario rinominare il file ht.access presente nella root dell\'installazione di EVO in .htaccess per poter utilizzare gli URL Semplici.';
 $_lang["settings_friendlyurls_alert2"] = 'Dasto che EVO è installato in una sottodirectory è necessario modificare di conseguenza il file .htaccess.';
@@ -1328,39 +1326,39 @@ $_lang["mutate_settings.dynamic.php6"] = 'Invia una mail per gli errori EVO:';
 $_lang["mutate_settings.dynamic.php7"] = 'Non notificare';
 $_lang["mutate_settings.dynamic.php8"] = 'Verrà inviata una mail con la descrizione dell\'errore EVO a [(emailsender)] ([+emailsender+]). Si potranno vedere i dettagli dell\'errore dal Log Eventi.';
 
-$_lang["error_no_privileges"]         = "Non avete i diritti necessari per effettuare questa operazione!";
+$_lang["error_no_privileges"] = "Non avete i diritti necessari per effettuare questa operazione!";
 $_lang["error_no_optimise_tablename"] = "Impossibile trovare la tabella da ottimizzare!";
 $_lang["error_no_truncate_tablename"] = "Impossibile trovare la tabella da troncare!";
-$_lang["error_double_action"]         = "E' stata inviata una doppia azione (GET e POST)!";
-$_lang["error_no_id"]                 = "Nella richiesta manca l'ID del documento!";
-$_lang["error_id_nan"]                = "L'ID passato nella richiesta è NaN!";
-$_lang["error_parent_deleted"]        = "Failed because resource parent is deleted!";
-$_lang["error_no_parent"]             = "Impossibile trovare il nome del documento genitore!";
-$_lang["error_many_results"]          = "Sono stati trovati troppi risultati nel database!";
-$_lang["error_no_results"]            = "Sono stati trovati pochi risultati (o nessuno) nel database!";
-$_lang["error_no_user_selected"]      = "Non è stato selezionato l'utente a cui inviare questo messaggio!";
-$_lang["error_no_group_selected"]     = "Non è stato selezionato il gruppo a cui inviare questo messaggio!";
-$_lang["error_movedocument1"]         = "Il documento non può essere genitore di se stesso!";
-$_lang["error_movedocument2"]         = "Nella richiesta manca l'ID del documento!";
-$_lang["error_movedocument3"]         = "Nella richiesta non è stato indicato il nuovo genitore!";
-$_lang["error_internet_connection"]   = "Il server non è disponibile. Controlla la tua connessione Internet!";
+$_lang["error_double_action"] = "E' stata inviata una doppia azione (GET e POST)!";
+$_lang["error_no_id"] = "Nella richiesta manca l'ID del documento!";
+$_lang["error_id_nan"] = "L'ID passato nella richiesta è NaN!";
+$_lang["error_parent_deleted"] = "Failed because resource parent is deleted!";
+$_lang["error_no_parent"] = "Impossibile trovare il nome del documento genitore!";
+$_lang["error_many_results"] = "Sono stati trovati troppi risultati nel database!";
+$_lang["error_no_results"] = "Sono stati trovati pochi risultati (o nessuno) nel database!";
+$_lang["error_no_user_selected"] = "Non è stato selezionato l'utente a cui inviare questo messaggio!";
+$_lang["error_no_group_selected"] = "Non è stato selezionato il gruppo a cui inviare questo messaggio!";
+$_lang["error_movedocument1"] = "Il documento non può essere genitore di se stesso!";
+$_lang["error_movedocument2"] = "Nella richiesta manca l'ID del documento!";
+$_lang["error_movedocument3"] = "Nella richiesta non è stato indicato il nuovo genitore!";
+$_lang["error_internet_connection"] = "Il server non è disponibile. Controlla la tua connessione Internet!";
 
-$_lang["login_processor_unknown_user"]       = "Username o password errati!";
-$_lang["login_processor_wrong_password"]     = "Username o password errati!";
+$_lang["login_processor_unknown_user"] = "Username o password errati!";
+$_lang["login_processor_wrong_password"] = "Username o password errati!";
 $_lang["login_processor_many_failed_logins"] = "Accesso bloccato a causa di troppi tentativi falliti!";
-$_lang["login_processor_verified"]           = "User verification required!";
-$_lang["login_processor_blocked1"]           = "Impossibile accedere, l'accesso è stato bloccato!";
-$_lang["login_processor_blocked2"]           = "L'accesso è stato bloccato! Riprovare più tardi.";
-$_lang["login_processor_blocked3"]           = "Dopo una certa data sarai bloccato e non potrai più accedere!";
-$_lang["login_processor_bad_code"]           = "Codice di sicurezza errato! Riprovare!";
-$_lang["login_processor_remotehost_ip"]      = "In nome del tuo host non corrisponde al tuo indirizzo IP!";
-$_lang["login_processor_remote_ip"]          = "Non ti puoi collegare da questa località!";
-$_lang["login_processor_date"]               = "Non puoi accedere adesso. Prova in un altro momento.";
-$_lang["login_processor_captcha_config"]     = "Captcha non è configurato correttamente.";
+$_lang["login_processor_verified"] = "User verification required!";
+$_lang["login_processor_blocked1"] = "Impossibile accedere, l'accesso è stato bloccato!";
+$_lang["login_processor_blocked2"] = "L'accesso è stato bloccato! Riprovare più tardi.";
+$_lang["login_processor_blocked3"] = "Dopo una certa data sarai bloccato e non potrai più accedere!";
+$_lang["login_processor_bad_code"] = "Codice di sicurezza errato! Riprovare!";
+$_lang["login_processor_remotehost_ip"] = "In nome del tuo host non corrisponde al tuo indirizzo IP!";
+$_lang["login_processor_remote_ip"] = "Non ti puoi collegare da questa località!";
+$_lang["login_processor_date"] = "Non puoi accedere adesso. Prova in un altro momento.";
+$_lang["login_processor_captcha_config"] = "Captcha non è configurato correttamente.";
 
-$_lang["dp_dayNames"]   = "['Domenica', 'Lunedì', 'Martedì', 'Mercoledì', 'Giovedì', 'Venerdì', 'Sabato'] ";
+$_lang["dp_dayNames"] = "['Domenica', 'Lunedì', 'Martedì', 'Mercoledì', 'Giovedì', 'Venerdì', 'Sabato'] ";
 $_lang["dp_monthNames"] = "['Gennaio', 'Febbraio', 'Marzo', 'Aprile', 'Maggio', 'Giugno', 'Luglio', 'Agosto', 'Settembre', 'Ottobre', 'Novembre', 'Dicembre']";
-$_lang["dp_startDay"]   = "1";
+$_lang["dp_startDay"] = "1";
 
 $_lang["check_all"] = "Seleziona tutto";
 $_lang["check_none"] = "Annulla selezione";
@@ -1374,10 +1372,10 @@ $_lang["reset_sysfiles_checksum_button"] = "Resetta Controllo";
 $_lang["reset_sysfiles_checksum_alert"] = "Sei sicuro di voler resettare il controllo dei file di sistema?";
 
 $_lang["file_browser_disabled_msg"] = "Il File Browser non è abilitato";
-$_lang["which_browser_default_title"]= "Default File Browser";
-$_lang["which_browser_default_msg"]= "Scegli il browser di file come default. Nelle Impostazioni utente è possibile scegliere un browser personalizzato per ogni utente, o lasciarlo impostato al &quot;default&quot;.";
-$_lang["which_browser_title"]= "File Browser";
-$_lang["which_browser_msg"]= "È possibile scegliere un browser di file personalizzato per ogni utente. Per utilizzare l'impostazione predefinita, lasciarlo su &quot;Default&quot;.";
+$_lang["which_browser_default_title"] = "Default File Browser";
+$_lang["which_browser_default_msg"] = "Scegli il browser di file come default. Nelle Impostazioni utente è possibile scegliere un browser personalizzato per ogni utente, o lasciarlo impostato al &quot;default&quot;.";
+$_lang["which_browser_title"] = "File Browser";
+$_lang["which_browser_msg"] = "È possibile scegliere un browser di file personalizzato per ogni utente. Per utilizzare l'impostazione predefinita, lasciarlo su &quot;Default&quot;.";
 $_lang["option_default"] = "Default";
 $_lang["position"] = "Posizione";
 $_lang["are_you_sure"] = "Sei sicuro?";
@@ -1410,18 +1408,18 @@ $_lang["minifyphp_incache_message"] = 'Minimizza il codice php (snippets e plugi
 
 $_lang["logout_reminder_msg"] = "Promemoria: Sembra che il [+date+] ti sei dimenticato di effettuare il  logout. Si prega di prestare attenzione in futuro nel fare logout quando si ha finito di lavorare.";
 
-$_lang["allow_eval_title"]             = "Utilizza Eval per eseguire il codice PHP nelle chiamate snippet";
-$_lang["allow_eval_msg"]               = "Per gli sviluppatori : Si prega di utilizzare \$modx-&gt;safeEval().";
-$_lang["allow_eval_with_scan"]         = "Esegui solo funzioni consentite";
+$_lang["allow_eval_title"] = "Utilizza Eval per eseguire il codice PHP nelle chiamate snippet";
+$_lang["allow_eval_msg"] = "Per gli sviluppatori : Si prega di utilizzare \$modx-&gt;safeEval().";
+$_lang["allow_eval_with_scan"] = "Esegui solo funzioni consentite";
 $_lang["allow_eval_with_scan_at_post"] = "Esegui tutto, eccetto in caso di POST, dove esegui solo funzioni consentite";
-$_lang["allow_eval_everytime_eval"]    = "Illimitato (utilizzare solo per il debug)";
-$_lang["allow_eval_dont_eval"]         = "Non consentire tutte le funzioni";
+$_lang["allow_eval_everytime_eval"] = "Illimitato (utilizzare solo per il debug)";
+$_lang["allow_eval_dont_eval"] = "Non consentire tutte le funzioni";
 
 $_lang["safe_functions_at_eval_title"] = "Funzioni in cui consentire eval";
-$_lang["safe_functions_at_eval_msg"]   = "Elenco separato da virgole";
+$_lang["safe_functions_at_eval_msg"] = "Elenco separato da virgole";
 
-$_lang["multiple_sessions_msg"]   = "Informazione: Rilevate contemporaneamente sessioni multiple attive (totale [+total+]) per l'utente <b>[+username+]</b>.";
-$_lang["iconv_not_available"]     = "È importante installare / abilitare l'estensione iconv..  Contatta il tuo fornitore di l'host, se non sai come abilitarlo.";
+$_lang["multiple_sessions_msg"] = "Informazione: Rilevate contemporaneamente sessioni multiple attive (totale [+total+]) per l'utente <b>[+username+]</b>.";
+$_lang["iconv_not_available"] = "È importante installare / abilitare l'estensione iconv..  Contatta il tuo fornitore di l'host, se non sai come abilitarlo.";
 
 $_lang["cm_create_new_category"] = "Crea una nuova categoria";
 $_lang["cm_category_name"] = "Nome categoria";

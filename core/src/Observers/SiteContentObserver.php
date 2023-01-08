@@ -6,7 +6,6 @@ class SiteContentObserver
 {
     public function saving(SiteContent $model) : bool
     {
-        $model->editedby = evolutionCMS()->getLoginUserID('mgr');
         $model->pagetitle = trim($model->pagetitle);
 
         return !empty($model->pagetitle);

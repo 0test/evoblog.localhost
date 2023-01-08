@@ -1,6 +1,19 @@
 [[@OnManagerWelcomePrerender]]
 
 <div class="container container-body">
+    <!-- safe mode -->
+    <div id="safe_mode" style="display: [+show_safe_mode+]">
+        <div class="widget-wrapper alert alert-danger">
+            [+safe_mode_msg+]
+        </div>
+    </div>
+
+    <!-- site available -->
+	<div id="site_status" style="display: [+show_site_status+]">
+		<div class="widget-wrapper alert alert-warning">
+			[+site_status_msg+]
+		</div>
+	</div>
 
 	<!-- logout reminder -->
 	<div id="logout_reminder" style="display:[+show_logout_reminder+]">

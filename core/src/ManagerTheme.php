@@ -427,8 +427,10 @@ class ManagerTheme implements ManagerThemeInterface
             $controller->setIndex($action);
             if (!$controller->canView()) {
                 $this->alertAndQuit('error_no_privileges');
-            } elseif (($out = $controller->checkLocked()) !== null) {
-                $this->alertAndQuit($out, false);
+            } elseif ($controller->checkLocked() === true) {
+                $elementType = $controller->getElementType();
+                $username = $this->getCore()->elementIsLocked($elementType, $controller->getElementId())['username'];
+                $this->alertAndQuit(sprintf($this->getLexicon('lock_msg'), $username, $this->getLexicon('lock_element_type_' . $elementType)), false);
             } elseif ($controller->process()) {
                 $out = $controller->render();
             } else {
@@ -538,7 +540,7 @@ class ManagerTheme implements ManagerThemeInterface
     public function hasManagerAccess()
     {
         // check if user is allowed to access manager interface
-        return $this->getCore()->hasPermission('access_permissions', 'mgr') === 1;
+        return $this->getCore()->hasPermission('access_permissions', 'mgr');
     }
 
     public function getManagerStartupPageId()

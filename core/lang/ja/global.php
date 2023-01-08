@@ -126,7 +126,7 @@ $_lang["configcheck_errorpage_unavailable"] = '設定した「エラーページ
 $_lang["configcheck_errorpage_unavailable_msg"] = '設定した「エラーページ」が一般的なエンドユーザーからアクセスできないページ（private）かあるいは存在しないことを意味しています。この場合、システムがループ状態に陥り、多くのエラーメッセージをエラーログに記録してしまいます。「エラーページ」には存在するページでかつ、公開ページ、かつ「public」なページを指定してください。';
 $_lang["configcheck_errorpage_unpublished"] = 'グローバル設定で設定されたエラーページは公開されていません。';
 $_lang["configcheck_errorpage_unpublished_msg"] = '設定したエラーページが誰でも見られるようにはなっていないことを意味します。エラーページは全ての人(Public)に公開するようにしてください。';
-$_lang["configcheck_filemanager_path"] = '現在設定されている <a href="index.php?a=17&tab=5">ファイルマネージャーのパス</a>は不完全なようです。';
+$_lang["configcheck_filemanager_path"] = 'The currently set <a href="index.php?a=17&tab=4">File Manager path</a> seems incorrect.';
 $_lang["configcheck_filemanager_path_msg"] = '例えば、この問題は異なるディレクトリやサーバーに移動されたことで生じています。Evoのグローバル設定を確認し、更新してください。';
 $_lang["configcheck_hide_warning"] = '<a href="javascript:hideConfigCheckWarning(\'%s\');"><em>次からこの警告を表示しない</em></a>';
 $_lang["configcheck_images"] = 'images/ディレクトリに書き込みできません';
@@ -139,7 +139,7 @@ $_lang["configcheck_notok"] = '動作環境に問題があります。';
 $_lang["configcheck_ok"] = '問題なし - 警告はありません。';
 $_lang["configcheck_php_gdzip"] = 'GDライブラリが読み込まれてません。';
 $_lang["configcheck_php_gdzip_msg"] = 'このサーバでは<a href="http://www.google.com/search?q=gd+%22php.ini%22&lr=lang_ja" target="_blank">GDライブラリ</a>が読み込まれてません。<a href="http://www.google.com/cse?cx=007286147079563201032%3Aigbcdgg0jyo&ie=UTF-8&q=CAPTCHA&sa.x=26&sa.y=8&siteurl=http:%2F%2Fforum.modx.jp%2F" target="_blank">ログイン時の画像認証機能(CAPTCHA)</a>など画像まわりの処理に制限があります。';
-$_lang["configcheck_rb_base_dir"] = '現在の設定している <a href="index.php?a=17&tab=6">ファイルのベースパス</a> は不完全のようです。';
+$_lang["configcheck_rb_base_dir"] = 'The currently set <a href="index.php?a=17&tab=5">File Browser path</a> seems incorrect.';
 $_lang["configcheck_rb_base_dir_msg"] = '例えば、この問題は異なるディレクトリやサーバーに移動されたことで生じています。グローバル設定を確認し、更新してください。';
 $_lang["configcheck_register_globals"] = '「register_globals」が「ON」に設定されており、セキュリティ上問題があります。';
 $_lang["configcheck_register_globals_msg"] = 'register_globals がonになっているため、この環境は非常に脆弱です。.htaccessまたはphp.iniによって off にすることを強くおすすめします。';
@@ -156,6 +156,7 @@ $_lang["configcheck_validate_referer"] = 'セキュリティ警告: 参照元チ
 $_lang["configcheck_validate_referer_msg"] = '<a href="index.php?a=17">グローバル設定</a>の<strong>「管理画面のリファラチェック」</strong>がオフになっています。セキュリティ強化のためオンにすることをおすすめします。<br /><a href="javascript:hideHeaderVerificationWarning();"><em>今後この警告を表示しない</em></a>';
 $_lang["configcheck_warning"] = '警告';
 $_lang["configcheck_what"] = 'どういう意味ですか?';
+$_lang["safe_mode_warning"] = 'Safe mode is enabled. Manager functionality is limited.';
 $_lang["confirm_block"] = 'このアカウントを休止してもよろしいですか?';
 $_lang["confirm_delete_category"] = 'このカテゴリーを削除してもよろしいですか?';
 $_lang["confirm_delete_eventlog"] = 'このログエントリーを削除してもよろしいですか?';
@@ -378,7 +379,7 @@ $_lang["group_access_permissions"] = 'ユーザーグループのアクセス';
 $_lang['group_tvs'] = 'テンプレート変数をグループ化';
 $_lang["guid"] = 'GUID';
 $_lang["help"] = 'ヘルプ';
-$_lang["help_msg"] = '<p><a href="http://forum.modx.jp/" target="_blank">MODX日本公式フォーラム</a>でサポートを得ることができます。 また、逐次執筆が進められている<a href="http://www.evolution-docs.com/documentation/" target="_blank">EVOドキュメントとガイド（英語）</a>があり、EVO のほぼすべてに関して記されています。</p>';
+$_lang["help_msg"] = '<p><a href="http://forum.modx.jp/" target="_blank">EVO日本公式フォーラム</a>でサポートを得ることができます。 また、逐次執筆が進められている<a href="http://www.evolution-docs.com/documentation/" target="_blank">EVOドキュメントとガイド（英語）</a>があり、EVO のほぼすべてに関して記されています。</p>';
 $_lang["help_title"] = 'サポート';
 $_lang["hide_tree"] = 'リソースツリーを非表示';
 $_lang["home"] = 'ダッシュボード';
@@ -408,7 +409,6 @@ $_lang["update_tree_description"] = '<ul>
                      </ul>';
 $_lang["update_tree_danger"] = '1000以上のリソースがある場合、CLIモード（\'php artisan closuretable: rebuild command\'）による操作で実行する方が良いです。';
 $_lang["update_tree_time"] = 'ツリーの再構築が終了しました。ドキュメント処理: <b>%s</b><br>インポートに <b>%s</b> 秒かかりました。';
-$_lang["inbox"] = '受信トレイ';
 $_lang["info"] = '情報';
 $_lang["information"] = '情報';
 $_lang["inline"] = 'ブラウザ内に通常表示';
@@ -481,8 +481,6 @@ $_lang["login_message"] = 'ログイン名とパスワードは大文字・小�
 $_lang["logo_slogan"] = 'EVO Content Manager - \nCreate and do more with less';
 $_lang["logout"] = 'ログアウト';
 $_lang["long_title"] = 'タイトル';
-$_lang["mail_check_timeperiod_message"] = '<a href="index.php?a=10">メッセージ機能</a>のメッセージチェックの間隔を「秒」で指定します';
-$_lang["mail_check_timeperiod_title"] = 'メッセージチェックの間隔';
 $_lang["manage_depends"] = '関連付けの管理';
 $_lang["manage_files"] = 'ファイル管理';
 $_lang["manage_htmlsnippets"] = 'チャンク';
@@ -595,8 +593,6 @@ $_lang["no_records_found"] = 'レコードはありません。';
 $_lang["no_results"] = '何もありません';
 $_lang["nologentries_message"] = '<a href="index.php?a=13">管理操作ログ</a>閲覧時、1ページあたりに表示されるログエントリー数を入力してください。';
 $_lang["nologentries_title"] = 'ログエントリー数';
-$_lang["nomessages_message"] = 'メッセージ閲覧時、受信ボックスに表示されるメッセージ数を入力してください。';
-$_lang["nomessages_title"] = 'メッセージ数';
 $_lang["none"] = 'なし';
 $_lang["noresults_message"] = '管理画面内の各機能の検索結果の一覧で、ページあたり何件表示するかを指定してください。';
 $_lang["noresults_title"] = '結果の件数';
@@ -1201,9 +1197,8 @@ $_lang["websignupemail_title"] = 'ウェブサインアップメール';
 $_lang["allow_multiple_emails_title"] = 'ウェブユーザーのメールアドレスの重複を許可する。';
 $_lang["allow_multiple_emails_message"] = 'メンバーが自分のメールアドレスを持たない場合や家族のメールアドレスがひとつしかない場合にウェブユーザーに同じメールアドレスを共有する許可を与えます。<br/>※ 「はい」にした場合、パスワードの記憶と登録はこのオプションを考慮する必要があります。';
 $_lang["wednesday"] = '水';
-$_lang["welcome_messages"] = '受信トレイに <strong>%d</strong> 件のメッセージが入っています。<strong>%s</strong> 件が未読です。';
 $_lang["welcome_title"] = 'ダッシュボード';
-$_lang["which_editor_message"] = 'デフォルトで使用するリッチテキストエディターを選択してください(※<a href="http://www.modx.com/extras/category/richtexteditors?product=evolution" target="_blank">MODXのダウンロードページ</a>には追加でインストールできるリッチテキストエディターがあります)。';
+$_lang["which_editor_message"] = 'デフォルトで使用するリッチテキストエディターを選択してください(※<a href="http://www.modx.com/extras/category/richtexteditors?product=evolution" target="_blank">EVOのダウンロードページ</a>には追加でインストールできるリッチテキストエディターがあります)。';
 $_lang["which_editor_title"] = '使用エディター';
 $_lang["working"] = '処理中';
 $_lang["wrap_lines"] = '行の折り返し';
@@ -1310,9 +1305,12 @@ $_lang["cache_type_1"] = 'リソースIDのみを元にしたキャッシュ（�
 $_lang["cache_type_2"] = 'リソースIDと$_GETパラメータを元にしたキャッシュ';
 $_lang["seostrict_title"] = '厳密なURL（SEO Strict URLs）を使う';
 $_lang["seostrict_message"] = 'コンテンツの重複を防ぐために厳密なURLの使用を強制する（必要な場合）';
-$_lang["aliaslistingfolder_title"] = 'フォルダにのみエイリアスリスティング（AliasListing）を使用する';
-$_lang["full_aliaslisting_title"] = '全てのリソースに対するエイリアスリスティングを無効';
-$_lang["aliaslistingfolder_message"] = '大量のリソースがある場合にメモリ消費量を削減する';
+
+$_lang["alias_listing_title"] = 'Use AliasListing cache';
+$_lang["alias_listing_message"] = 'Caching page aliases, have to be disabled if a site have huge amount of resources. "Disabled" reduces memory consumption when site have large number of resources.';
+$_lang["alias_listing_disabled"] = 'Disabled';
+$_lang["alias_listing_folders"] = 'Only for folders';
+$_lang["alias_listing_enabled"] = 'Enabled';
 
 $_lang["settings_friendlyurls_alert"] = 'フレンドリーURL機能を利用するにはEVO設置ディレクトリの\nsample.htaccessファイルを.htaccessにリネームする必要があります。\nサブディレクトリに設置している場合はファイル内の\nRewriteBaseの値を変更してください。';
 $_lang["settings_friendlyurls_alert2"] = 'EVOはサブディレクトリにインストールされました。.htaccessの内容を変更する必要があります。(参考 : install/tpl/htaccess.tpl)';
@@ -1325,39 +1323,39 @@ $_lang["mutate_settings.dynamic.php6"] = 'EVOのエラーをメールで通知�
 $_lang["mutate_settings.dynamic.php7"] = '通知しない';
 $_lang["mutate_settings.dynamic.php8"] = 'エラー発生時に[(emailsender)]([+emailsender+])に通知します。エラーの内容の詳細は<a href="index.php?a=114">イベントログ</a>を確認してください。';
 
-$_lang["error_no_privileges"]         = "この操作を行なう権限がありません。";
+$_lang["error_no_privileges"] = "この操作を行なう権限がありません。";
 $_lang["error_no_optimise_tablename"] = "最適化するテーブルがリクエストに見つかりません。";
 $_lang["error_no_truncate_tablename"] = "削除するテーブルがリクエストに見つかりません。";
-$_lang["error_double_action"]         = "二重のアクション（GET と POST）が送信されました。";
-$_lang["error_no_id"]                 = "IDがリクエストにわたされませんでした。";
-$_lang["error_id_nan"]                = "リクエストでわたされたIDはNaNです。";
-$_lang["error_parent_deleted"]        = "Failed because resource parent is deleted!";
-$_lang["error_no_parent"]             = "親のリソース名を見つけられませんでした。";
-$_lang["error_many_results"]          = "データベースからの返り値が多過ぎます。内部処理に問題があります。";
-$_lang["error_no_results"]            = "データベースからの結果が足りない/ありません。";
-$_lang["error_no_user_selected"]      = "このメッセージの受信者として選択されているユーザーはいません。";
-$_lang["error_no_group_selected"]     = "このメッセージの受信者として選択されたグループはありません。";
-$_lang["error_movedocument1"]         = "自分自身を親として指定することはできません。";
-$_lang["error_movedocument2"]         = "リソースのIDがリクエストにわたされませんでした。";
-$_lang["error_movedocument3"]         = "新しい親リソースがリクエストに設定されていません。";
-$_lang["error_internet_connection"]   = "サーバーが利用不可能です。インターネットが繋がっているか確認してください。";
+$_lang["error_double_action"] = "二重のアクション（GET と POST）が送信されました。";
+$_lang["error_no_id"] = "IDがリクエストにわたされませんでした。";
+$_lang["error_id_nan"] = "リクエストでわたされたIDはNaNです。";
+$_lang["error_parent_deleted"] = "Failed because resource parent is deleted!";
+$_lang["error_no_parent"] = "親のリソース名を見つけられませんでした。";
+$_lang["error_many_results"] = "データベースからの返り値が多過ぎます。内部処理に問題があります。";
+$_lang["error_no_results"] = "データベースからの結果が足りない/ありません。";
+$_lang["error_no_user_selected"] = "このメッセージの受信者として選択されているユーザーはいません。";
+$_lang["error_no_group_selected"] = "このメッセージの受信者として選択されたグループはありません。";
+$_lang["error_movedocument1"] = "自分自身を親として指定することはできません。";
+$_lang["error_movedocument2"] = "リソースのIDがリクエストにわたされませんでした。";
+$_lang["error_movedocument3"] = "新しい親リソースがリクエストに設定されていません。";
+$_lang["error_internet_connection"] = "サーバーが利用不可能です。インターネットが繋がっているか確認してください。";
 
-$_lang["login_processor_unknown_user"]       = "ログイン名またはパスワードが間違っています。";
-$_lang["login_processor_wrong_password"]     = "ログイン名またはパスワードが間違っています。";
+$_lang["login_processor_unknown_user"] = "ログイン名またはパスワードが間違っています。";
+$_lang["login_processor_wrong_password"] = "ログイン名またはパスワードが間違っています。";
 $_lang["login_processor_many_failed_logins"] = "ログインを数回失敗したため、一時的にアクセスが制限されています。";
-$_lang["login_processor_verified"]           = "User verification required!";
-$_lang["login_processor_blocked1"]           = "ログインをブロックされています。";
-$_lang["login_processor_blocked2"]           = "ログインをブロックされています。しばらくたってから再び試してください。";
-$_lang["login_processor_blocked3"]           = "指定された日以降は自動的にブロックされ、ログインできなくなります。";
-$_lang["login_processor_bad_code"]           = "入力されたセキュリティコードが間違っています。";
-$_lang["login_processor_remotehost_ip"]      = "あなたのホスト名はあなたのIPアドレスを示していません。";
-$_lang["login_processor_remote_ip"]          = "この場所からログインすることは許可されていません。";
-$_lang["login_processor_date"]               = "現時点であなたはログインすることを許可されていません。後でもう一度やり直してください。";
-$_lang["login_processor_captcha_config"]     = "キャプチャが正しく設定されていません";
+$_lang["login_processor_verified"] = "User verification required!";
+$_lang["login_processor_blocked1"] = "ログインをブロックされています。";
+$_lang["login_processor_blocked2"] = "ログインをブロックされています。しばらくたってから再び試してください。";
+$_lang["login_processor_blocked3"] = "指定された日以降は自動的にブロックされ、ログインできなくなります。";
+$_lang["login_processor_bad_code"] = "入力されたセキュリティコードが間違っています。";
+$_lang["login_processor_remotehost_ip"] = "あなたのホスト名はあなたのIPアドレスを示していません。";
+$_lang["login_processor_remote_ip"] = "この場所からログインすることは許可されていません。";
+$_lang["login_processor_date"] = "現時点であなたはログインすることを許可されていません。後でもう一度やり直してください。";
+$_lang["login_processor_captcha_config"] = "キャプチャが正しく設定されていません";
 
-$_lang["dp_dayNames"]   = "['日曜日','月曜日','火曜日','水曜日','木曜日','金曜日','土曜日']";
+$_lang["dp_dayNames"] = "['日曜日','月曜日','火曜日','水曜日','木曜日','金曜日','土曜日']";
 $_lang["dp_monthNames"] = "['1月', '2月', '3月', '4月', '5月', '6月', '7月', '8月', '9月', '10月', '11月', '12月']";
-$_lang["dp_startDay"]   = "1";
+$_lang["dp_startDay"] = "1";
 
 $_lang["check_all"] = "すべて選択";
 $_lang["check_none"] = "すべて解除";
@@ -1371,10 +1369,10 @@ $_lang["reset_sysfiles_checksum_button"] = "チェックサムを再構築する
 $_lang["reset_sysfiles_checksum_alert"] = "システムファイルのチェックサムをリセットしてよろしいですか？";
 
 $_lang["file_browser_disabled_msg"] = "ファイルブラウザ機能が有効になっていません。";
-$_lang["which_browser_default_title"]= "デフォルトのファイルブラウザ";
-$_lang["which_browser_default_msg"]= "デフォルトとして使用するファイルブラウザを選択してください。ユーザー設定では、ユーザーごとにカスタムブラウザを選択するか、「デフォルト」のままにします。";
-$_lang["which_browser_title"]= "ファイルブラウザ";
-$_lang["which_browser_msg"]= "このユーザー用のカスタムファイルブラウザを選択できます。システムのデフォルトのブラウザを使用する場合は、「デフォルト」のままにします。";
+$_lang["which_browser_default_title"] = "デフォルトのファイルブラウザ";
+$_lang["which_browser_default_msg"] = "デフォルトとして使用するファイルブラウザを選択してください。ユーザー設定では、ユーザーごとにカスタムブラウザを選択するか、「デフォルト」のままにします。";
+$_lang["which_browser_title"] = "ファイルブラウザ";
+$_lang["which_browser_msg"] = "このユーザー用のカスタムファイルブラウザを選択できます。システムのデフォルトのブラウザを使用する場合は、「デフォルト」のままにします。";
 $_lang["option_default"] = "デフォルト";
 $_lang["position"] = "ポジション";
 $_lang["are_you_sure"] = "本当に実行しますか？";
@@ -1389,7 +1387,7 @@ $_lang["extras"] = "エクストラ";
 $_lang["display_locks"] = "表示をロックする";
 $_lang["role_display_locks"] = "表示をロックする";
 $_lang["session_timeout"] = "セッション・タイムアウト";
-$_lang["session_timeout_msg"] = "EVOは設定「メールチェック期間」に従ってサーバーにpingを送信します。最後のpingがこの設定を超えると、関連付けられているセッションは無効と見なされ、関連するすべてのロックが自動的に解除されます。値を分単位で設定します（2分より長く、デフォルトは15分）。";
+$_lang["session_timeout_msg"] = "Evolution CMS will ping the server, if the last ping exceeds this setting, the associated session will be considered invalid and all related locks will be removed automatically. Set value in minutes (>2min, default 15min).";
 $_lang["unlock_element_id_warning"] = "この [+element_type+] （ID [+id+]）のロックを解除してもよろしいですか？";
 $_lang["lock_element_type_1"] = "テンプレート";
 $_lang["lock_element_type_2"] = "テンプレート変数";
@@ -1407,18 +1405,18 @@ $_lang["minifyphp_incache_message"] = 'PHPコード（スニペットとプラ�
 
 $_lang["logout_reminder_msg"] = "注意：[+date+]にログアウトを忘れています。あなたの仕事を終えた後は、ログアウトすることに注意を払ってください。";
 
-$_lang["allow_eval_title"]             = "スニペットコール内でPHPコードの実行を許可";
-$_lang["allow_eval_msg"]               = "デベロッパーへ： \$modx-&gt;safeEval()を使用してください。";
-$_lang["allow_eval_with_scan"]         = "許可された関数のみを実行する";
+$_lang["allow_eval_title"] = "スニペットコール内でPHPコードの実行を許可";
+$_lang["allow_eval_msg"] = "デベロッパーへ： \$modx-&gt;safeEval()を使用してください。";
+$_lang["allow_eval_with_scan"] = "許可された関数のみを実行する";
 $_lang["allow_eval_with_scan_at_post"] = "すべての実行を許可する。ただし、POSTでは許可された関数のみ。";
-$_lang["allow_eval_everytime_eval"]    = "無制限（デバッグにのみ使用）";
-$_lang["allow_eval_dont_eval"]         = "すべての機能を許可しない";
+$_lang["allow_eval_everytime_eval"] = "無制限（デバッグにのみ使用）";
+$_lang["allow_eval_dont_eval"] = "すべての機能を許可しない";
 
 $_lang["safe_functions_at_eval_title"] = "evalを可能にする関数";
-$_lang["safe_functions_at_eval_msg"]   = "コンマで区切られたリスト";
+$_lang["safe_functions_at_eval_msg"] = "コンマで区切られたリスト";
 
-$_lang["multiple_sessions_msg"]   = "情報：ユーザー <b>[+username+]</b> に複数のアクティブユーザーセッション（合計 [+total+]）が見つかりました。";
-$_lang["iconv_not_available"]     = "拡張機能iconvをインストール/有効にすることが重要です。有効にする方法がわからない場合は、ホストに話してください。";
+$_lang["multiple_sessions_msg"] = "情報：ユーザー <b>[+username+]</b> に複数のアクティブユーザーセッション（合計 [+total+]）が見つかりました。";
+$_lang["iconv_not_available"] = "拡張機能iconvをインストール/有効にすることが重要です。有効にする方法がわからない場合は、ホストに話してください。";
 
 $_lang["cm_create_new_category"] = "新しいカテゴリー";
 $_lang["cm_category_name"] = "カテゴリー名";

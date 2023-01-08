@@ -26,11 +26,11 @@
 !/assets/export/index.html
 !/assets/export/.htaccess
 
-
+/assets/files/*
 !/assets/files/index.html
 !/assets/files/.htaccess
 
-
+/assets/images/*
 !/assets/images/index.html
 !/assets/images/evo-logo.png
 !/assets/images/.htaccess
@@ -44,20 +44,7 @@
 !/assets/site/.htaccess
 
 # Core
-
-/core/vendor/*
-/core/storage/bootstrap/*
-!/core/storage/bootstrap/.htaccess
-/core/storage/cache/*
-!/core/storage/cache/.gitkeep
-/core/storage/log/*
-!/core/storage/log/.gitkeep
-/core/storage/sessions/*
-!/core/storage/sessions/.gitkeep
-/core/storage/blade/*
-!/core/storage/blade/.gitkeep
-/core/custom/.env
-/core/custom/config/cms/settings.php
+/core/.install
 
 # Manager
 /manager/includes/config.inc.php

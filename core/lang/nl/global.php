@@ -126,7 +126,7 @@ $_lang["configcheck_errorpage_unavailable"] = 'Er is geen \'Fout\'-pagina voor u
 $_lang["configcheck_errorpage_unavailable_msg"] = 'Dit houdt in dat uw \'Fout\'-pagina niet toegankelijk is voor normale Webgebruikers of niet bestaat. Dit kan leiden tot een oneindige lus en veel foutmeldingen in uw logbestand. Zorg ervoor dat de Pagina niet aan een Webgebruikersgroep is toegewezen.';
 $_lang["configcheck_errorpage_unpublished"] = 'De \'Fout\'-pagina voor uw website is niet gepubliceerd of bestaat niet.';
 $_lang["configcheck_errorpage_unpublished_msg"] = 'Dit houdt in dat uw \'Fout\'-pagina niet toegankelijk is voor bezoekers. Publiceer de Pagina of zorg ervoor dat het is toegewezen aan een bestaande Pagina in de inhoudsopgave van uw website met het Beheer &gt; Configuratie menu.';
-$_lang["configcheck_filemanager_path"] = 'Het momenteel ingestelde <a href="/[+MGR_DIR+]/#?a=17&tab=5">Bestandsbeheer pad</a> lijkt onjuist te zijn.';
+$_lang["configcheck_filemanager_path"] = 'Het momenteel ingestelde <a href="/[+MGR_DIR+]/?a=17&amp;tab=4">Bestandsbeheer pad</a> lijkt onjuist te zijn.';
 $_lang["configcheck_filemanager_path_msg"] = 'Dit kan bijvoorbeeld gebeuren door uw installatie naar een andere directory of server te verhuizen. Controleer en update uw Evo systeemconfiguratie.';
 $_lang["configcheck_hide_warning"] = '<a href="javascript:hideConfigCheckWarning(\'%s\');"><em>Niet meer tonen.</em></a>';
 $_lang["configcheck_images"] = 'De Map images is niet schrijfbaar';
@@ -139,7 +139,7 @@ $_lang["configcheck_notok"] = '&Eacute;&eacute;n of meer configuratie opties zij
 $_lang["configcheck_ok"] = 'Controle is geslaagd - er zijn geen onjuistheden gevonden.';
 $_lang["configcheck_php_gdzip"] = 'GD en/of Zip PHP extensies niet gevonden';
 $_lang["configcheck_php_gdzip_msg"] = 'EVO heeft de GD- en Zip-extensie ingeschakeld voor PHP. Hoewel EVO zonder deze functies werkt, kunt u niet volledig profiteren van de ingebouwde bestandsbeheerder, afbeeldingseditor of Captcha voor aanmeldingen.';
-$_lang["configcheck_rb_base_dir"] = 'Het momenteel ingestelde basis <a href="/[+MGR_DIR+]/#?a=17&tab=6">Bestandsbeheer pad</a> lijkt onjuist te zijn.';
+$_lang["configcheck_rb_base_dir"] = 'Het momenteel ingestelde basis <a href="/[+MGR_DIR+]/?a=17&amp;tab=5">Bestandsbeheer pad</a> lijkt onjuist te zijn.';
 $_lang["configcheck_rb_base_dir_msg"] = 'Dit kan bijvoorbeeld gebeuren door uw installatie naar een andere directory of server te verplaatsen. Controleer en update uw Evo systeemconfiguratie.';
 $_lang["configcheck_register_globals"] = 'register_globals staat op AAN in uw php.ini configuratiebestand';
 $_lang["configcheck_register_globals_msg"] = 'Deze instelling maakt uw website veel gevoeliger voor Cross Site Scripting (XSS) aanvallen. Neem contact op met uw host over hoe u deze instelling kunt uitzetten.';
@@ -156,6 +156,7 @@ $_lang["configcheck_validate_referer"] = 'Beveiliging Waarschuwing: HTTP Header 
 $_lang["configcheck_validate_referer_msg"] = 'De configuratie instelling <strong>Validate HTTP_REFERER headers?</strong> staat UIT. We raden aan deze AAN te zetten. <a href="index.php?a=17">Ga naar de Configuratie opties</a>';
 $_lang["configcheck_warning"] = 'Configuratie waarschuwing:';
 $_lang["configcheck_what"] = 'Wat betekent dit?';
+$_lang["safe_mode_warning"] = 'Safe mode is enabled. Manager functionality is limited.';
 $_lang["confirm_block"] = 'Weet u zeker dat u deze Gebruiker wilt blokkeren?';
 $_lang["confirm_delete_category"] = 'Weet u zeker dat u deze categorie wilt verwijderen?';
 $_lang["confirm_delete_eventlog"] = 'Weet u zeker dat u het logboek (events) wilt leegmaken?';
@@ -408,7 +409,6 @@ $_lang["update_tree_description"] = '<ul>
                      </ul>';
 $_lang["update_tree_danger"] = 'Als je meer dan 1000 bronnen hebt, is het beter om deze operatie uit te voeren in CLI-modus met behulp van de \'php artisan closuretable: rebuild commando\'';
 $_lang["update_tree_time"] = 'Rebuild tree voltooid. Documenten verwerkt: <b>%s</b><br>Import nam <b>%s</b> seconden in beslag.';
-$_lang["inbox"] = 'Inbox';
 $_lang["info"] = 'Info';
 $_lang["information"] = 'Informatie';
 $_lang["inline"] = 'Ge&iuml;ntegreerd';
@@ -476,8 +476,6 @@ $_lang["login_message"] = 'Om Evolution te gebruiken dient u zich eerst aan te m
 $_lang["logo_slogan"] = 'EVO Content Manager - \nCreate and do more with less';
 $_lang["logout"] = 'Afmelden';
 $_lang["long_title"] = 'Uitgebreide titel';
-$_lang["mail_check_timeperiod_message"] = 'Hoe vaak in het Content Management Systeem gecontroleerd wordt op nieuwe berichten, in seconden.';
-$_lang["mail_check_timeperiod_title"] = 'Controleer e-mail tijdsinterval';
 $_lang["manage_depends"] = 'Beheer afhankelijkheden';
 $_lang["manage_files"] = 'Bestandsbeheer';
 $_lang["manage_htmlsnippets"] = 'Chunks';
@@ -590,8 +588,6 @@ $_lang["no_records_found"] = 'Geen resultaten gevonden.';
 $_lang["no_results"] = 'Geen resultaten gevonden.';
 $_lang["nologentries_message"] = 'Voer hier het aantal logresultaten in dat per Pagina in het logboek moet worden weergegeven.';
 $_lang["nologentries_title"] = 'Aantal log resultaten';
-$_lang["nomessages_message"] = 'U kunt hier het aantal berichten instellen dat bij het bekijken van berichten in de inbox moet worden weergegeven.';
-$_lang["nomessages_title"] = 'Aantal berichten';
 $_lang["none"] = 'Geen';
 $_lang["noresults_message"] = 'Het aantal regels dat wordt weergegeven in lijsten met bijvoorbeeld zoekresultaten';
 $_lang["noresults_title"] = 'Aantal regels';
@@ -1195,7 +1191,6 @@ $_lang["websignupemail_title"] = 'Bevestiging e-mail bij aanmelding:<br />(Webge
 $_lang["allow_multiple_emails_title"] = 'Dupliceer e-mailadres van webgebruiker';
 $_lang["allow_multiple_emails_message"] = 'Hiermee kunnen internetgebruikers hetzelfde e-mailadres delen voor situaties waarin een lid mogelijk geen eigen e-mailadres heeft of er slechts één familie-e-mailadres is.<br/>Notitie: Elke wachtwoordherinnering en registratielogica moet rekening houden met deze optie als deze is ingesteld op ja.';
 $_lang["wednesday"] = 'Woensdag';
-$_lang["welcome_messages"] = 'In uw inbox staan <b>%d</b> bericht(en), waarvan <b>%s</b> ongelezen.';
 $_lang["welcome_title"] = 'Welkom bij uw Evolution CMS Content Manager';
 $_lang["which_editor_message"] = 'Selecteer uw Texteditor (RTE). U kunt extra RTE\'s downloaden en installeren vanaf de downloadpagina.';
 $_lang["which_editor_title"] = 'Kies uw teksteditor';
@@ -1304,9 +1299,12 @@ $_lang["cache_type_1"] = 'Cache is gebaseerd op document id (standaard)';
 $_lang["cache_type_2"] = 'Cache is gebaseerd op document id en $_GET parameters';
 $_lang["seostrict_title"] = 'Gebruik SEO Strict URLs';
 $_lang["seostrict_message"] = 'Gebruik van strikte URL\'s om dubbele inhoud te voorkomen (wanneer dit plaatsvindt)';
-$_lang["aliaslistingfolder_title"] = 'Gebruik AliasListing alleen bij mappen';
-$_lang["full_aliaslisting_title"] = 'AliasListing uitschakelen voor alle pagina\'s';
-$_lang["aliaslistingfolder_message"] = 'Vermindert het geheugengebruik wanneer de site veel pagina\'s heeft';
+
+$_lang["alias_listing_title"] = 'Use AliasListing cache';
+$_lang["alias_listing_message"] = 'Caching page aliases, have to be disabled if a site have huge amount of resources. "Disabled" reduces memory consumption when site have large number of resources.';
+$_lang["alias_listing_disabled"] = 'Disabled';
+$_lang["alias_listing_folders"] = 'Only for folders';
+$_lang["alias_listing_enabled"] = 'Enabled';
 
 $_lang["settings_friendlyurls_alert"] = 'Het is noodzakelijk om het ht.access bestand in de EVO-installatiemap naar .htaccess te hernoemen voor het gebruik van de Friendly URL-functie.';
 $_lang["settings_friendlyurls_alert2"] = 'Omdat EVO in een submap is geïnstalleerd, is het noodzakelijk om de inhoud van .htaccess te wijzigen.';
@@ -1319,39 +1317,39 @@ $_lang["mutate_settings.dynamic.php6"] = 'Verzend e-mail bij fouten';
 $_lang["mutate_settings.dynamic.php7"] = 'not notify';
 $_lang["mutate_settings.dynamic.php8"] = 'Een e-mail met de foutbron wordt verzonden naar [(emailsender)] ([+emailsender+]) als er een fout optreedt. De details van de fout zijn te zien in het gebeurtenissenlogboek van de manager.';
 
-$_lang["error_no_privileges"]         = "Je hebt niet genoeg rechten hebt voor deze actie!";
+$_lang["error_no_privileges"] = "Je hebt niet genoeg rechten hebt voor deze actie!";
 $_lang["error_no_optimise_tablename"] = "Tabel optimaliseren niet gevonden in aanvraag!";
 $_lang["error_no_truncate_tablename"] = "Tabel voor truncate niet gevonden!";
-$_lang["error_double_action"]         = "Dubbele actie (GET & POST) geplaatst!";
-$_lang["error_no_id"]                 = "Document ID niet doorgegeven in aanvraag!";
-$_lang["error_id_nan"]                = "Doorgegeven ID is NaN!";
-$_lang["error_parent_deleted"]        = "Mislukt omdat bovenliggende resource is verwijderd!";
-$_lang["error_no_parent"]             = "Kon naam bovenliggende document niet vinden!";
-$_lang["error_many_results"]          = "Te veel resultaten uit de database!";
-$_lang["error_no_results"]            = "Te weinig / geen resultaten terug van database!";
-$_lang["error_no_user_selected"]      = "Geen gebruiker geselecteerd als ontvanger van dit bericht!";
-$_lang["error_no_group_selected"]     = "Geen groep geselecteerd als ontvanger van dit bericht!";
-$_lang["error_movedocument1"]         = "Document kan niet zijn eigen onderliggende document zijn!";
-$_lang["error_movedocument2"]         = "Document ID niet doorgegeven in aanvraag!";
-$_lang["error_movedocument3"]         = "Nieuwe onderliggende document niet in aanvraag!";
-$_lang["error_internet_connection"]   = "Server is niet beschikbaar. Controleer je internetverbinding!";
+$_lang["error_double_action"] = "Dubbele actie (GET & POST) geplaatst!";
+$_lang["error_no_id"] = "Document ID niet doorgegeven in aanvraag!";
+$_lang["error_id_nan"] = "Doorgegeven ID is NaN!";
+$_lang["error_parent_deleted"] = "Mislukt omdat bovenliggende resource is verwijderd!";
+$_lang["error_no_parent"] = "Kon naam bovenliggende document niet vinden!";
+$_lang["error_many_results"] = "Te veel resultaten uit de database!";
+$_lang["error_no_results"] = "Te weinig / geen resultaten terug van database!";
+$_lang["error_no_user_selected"] = "Geen gebruiker geselecteerd als ontvanger van dit bericht!";
+$_lang["error_no_group_selected"] = "Geen groep geselecteerd als ontvanger van dit bericht!";
+$_lang["error_movedocument1"] = "Document kan niet zijn eigen onderliggende document zijn!";
+$_lang["error_movedocument2"] = "Document ID niet doorgegeven in aanvraag!";
+$_lang["error_movedocument3"] = "Nieuwe onderliggende document niet in aanvraag!";
+$_lang["error_internet_connection"] = "Server is niet beschikbaar. Controleer je internetverbinding!";
 
-$_lang["login_processor_unknown_user"]       = "Onjuiste gebruikersnaam of wachtwoord ingevoerd!";
-$_lang["login_processor_wrong_password"]     = "Onjuiste gebruikersnaam of wachtwoord ingevoerd!";
+$_lang["login_processor_unknown_user"] = "Onjuiste gebruikersnaam of wachtwoord ingevoerd!";
+$_lang["login_processor_wrong_password"] = "Onjuiste gebruikersnaam of wachtwoord ingevoerd!";
 $_lang["login_processor_many_failed_logins"] = "Wegens te veel mislukte aanmeldingen ben je geblokkeerd!";
-$_lang["login_processor_verified"]           = "Gebruikersverificatie vereist!";
-$_lang["login_processor_blocked1"]           = "U bent geblokkeerd en kan niet inloggen!";
-$_lang["login_processor_blocked2"]           = "U bent geblokkeerd en kan niet inloggen! Probeer het later opnieuw.";
-$_lang["login_processor_blocked3"]           = "U wordt automatisch geblokkeerd na een bepaalde datum en kunt niet meer inloggen!";
-$_lang["login_processor_bad_code"]           = "De veiligheidscode klopt niet! Probeer het opnieuw!";
-$_lang["login_processor_remotehost_ip"]      = "Uw hostnaam verwijst niet terug naar uw IP!";
-$_lang["login_processor_remote_ip"]          = "Het is niet toegestaan ​​om in te loggen vanaf deze locatie.";
-$_lang["login_processor_date"]               = "Het is niet toegestaan ​​om in te loggen op dit moment. Probeer het later opnieuw.";
-$_lang["login_processor_captcha_config"]     = "Captcha is niet correct geconfigureerd.";
+$_lang["login_processor_verified"] = "Gebruikersverificatie vereist!";
+$_lang["login_processor_blocked1"] = "U bent geblokkeerd en kan niet inloggen!";
+$_lang["login_processor_blocked2"] = "U bent geblokkeerd en kan niet inloggen! Probeer het later opnieuw.";
+$_lang["login_processor_blocked3"] = "U wordt automatisch geblokkeerd na een bepaalde datum en kunt niet meer inloggen!";
+$_lang["login_processor_bad_code"] = "De veiligheidscode klopt niet! Probeer het opnieuw!";
+$_lang["login_processor_remotehost_ip"] = "Uw hostnaam verwijst niet terug naar uw IP!";
+$_lang["login_processor_remote_ip"] = "Het is niet toegestaan ​​om in te loggen vanaf deze locatie.";
+$_lang["login_processor_date"] = "Het is niet toegestaan ​​om in te loggen op dit moment. Probeer het later opnieuw.";
+$_lang["login_processor_captcha_config"] = "Captcha is niet correct geconfigureerd.";
 
-$_lang["dp_dayNames"]   = "['Zondag', 'Maandag', 'Dinsdag', 'Woensdag', 'Donderdag', 'Vrijdag', 'Zaterdag']";
+$_lang["dp_dayNames"] = "['Zondag', 'Maandag', 'Dinsdag', 'Woensdag', 'Donderdag', 'Vrijdag', 'Zaterdag']";
 $_lang["dp_monthNames"] = "['Januari', 'Februari', 'Maart', 'April', 'Mei', 'Juni', 'Juli', 'Augustus', 'September', 'Oktober', 'November', 'December']";
-$_lang["dp_startDay"]   = "1";
+$_lang["dp_startDay"] = "1";
 
 $_lang["check_all"] = "Selecteer alle";
 $_lang["check_none"] = "Deselecteer alle";
@@ -1365,10 +1363,10 @@ $_lang["reset_sysfiles_checksum_button"] = "Heropbouw Checksums";
 $_lang["reset_sysfiles_checksum_alert"] = "Weet u zeker dat u de systeembestanden checksums wil resetten?";
 
 $_lang["file_browser_disabled_msg"] = "De Bestandsbrowser custom optie staat niet aangeschakeld.";
-$_lang["which_browser_default_title"]= "Standaard bestandsbrowser";
-$_lang["which_browser_default_msg"]= "Kies de Bestandsbrowser welke u liever als standaard gebruikt. Bij de gebruikers instellingen kunt u kiezen voor een custom Bestandsbrowser per gebruiker.";
-$_lang["which_browser_title"]= "Bestandsbrowser";
-$_lang["which_browser_msg"]= "U kunt kiezen om een aangepaste Bestandsbrowser te gebruiken voor deze gebruiker.";
+$_lang["which_browser_default_title"] = "Standaard bestandsbrowser";
+$_lang["which_browser_default_msg"] = "Kies de Bestandsbrowser welke u liever als standaard gebruikt. Bij de gebruikers instellingen kunt u kiezen voor een custom Bestandsbrowser per gebruiker.";
+$_lang["which_browser_title"] = "Bestandsbrowser";
+$_lang["which_browser_msg"] = "U kunt kiezen om een aangepaste Bestandsbrowser te gebruiken voor deze gebruiker.";
 $_lang["option_default"] = "Standaard";
 $_lang["position"] = "Positie";
 $_lang["are_you_sure"] = "Weet u het zeker?";
@@ -1383,7 +1381,7 @@ $_lang["extras"] = "Add-ons";
 $_lang["display_locks"] = "Toon geblokkeerde";
 $_lang["role_display_locks"] = "Toon geblokkeerde";
 $_lang["session_timeout"] = "Sessie timeout";
-$_lang["session_timeout_msg"] = "EVO pingt de server volgens de instelling &quot;Mail Check Time Period&quot;. Als de laatste ping deze instelling overschrijdt, wordt de bijbehorende sessie als ongeldig beschouwd en worden alle gerelateerde vergrendelingen automatisch verwijderd. Stel de waarde in minuten in (> 2min, standaard 15min).";
+$_lang["session_timeout_msg"] = "Evolution CMS pingt de server, als de laatste ping deze instelling overschrijdt, wordt de bijbehorende sessie als ongeldig beschouwd en worden alle gerelateerde vergrendelingen automatisch verwijderd. Ingestelde waarde in minuten (>2min, standaard 15min).";
 $_lang["unlock_element_id_warning"] = "Weet u zeker dat je [+element_type+] (ID [+id+]) wilt vrijgeven voor bewerken?";
 $_lang["lock_element_type_1"] = "Template";
 $_lang["lock_element_type_2"] = "Template Variabele";
@@ -1401,18 +1399,18 @@ $_lang["minifyphp_incache_message"] = 'Minify php code (snippets en plugins) en 
 
 $_lang["logout_reminder_msg"] = "Ter herinnering: Het lijkt er op dat op [+datum+] je vergeten bent om uit te loggen. In de toekomst kun je dit beter wel doen na je werk!";
 
-$_lang["allow_eval_title"]             = "Eval php code in je snippet";
-$_lang["allow_eval_msg"]               = "Voor ontwikkelaars: Gebruik \$modx-&gt;safeEval().";
-$_lang["allow_eval_with_scan"]         = "Alleen functies uitvoeren die worden toegestaan";
+$_lang["allow_eval_title"] = "Eval php code in je snippet";
+$_lang["allow_eval_msg"] = "Voor ontwikkelaars: Gebruik \$modx-&gt;safeEval().";
+$_lang["allow_eval_with_scan"] = "Alleen functies uitvoeren die worden toegestaan";
 $_lang["allow_eval_with_scan_at_post"] = "Alles uitvoeren. Echter met POST alleen toegestaande functies uitvoeren";
-$_lang["allow_eval_everytime_eval"]    = "Ongelimiteerd (gebruik alleen bij debugging)";
-$_lang["allow_eval_dont_eval"]         = "Niet alle functies toelaten";
+$_lang["allow_eval_everytime_eval"] = "Ongelimiteerd (gebruik alleen bij debugging)";
+$_lang["allow_eval_dont_eval"] = "Niet alle functies toelaten";
 
 $_lang["safe_functions_at_eval_title"] = "Functies die eval mogen toestaan";
-$_lang["safe_functions_at_eval_msg"]   = "Met komma's gescheiden lijst";
+$_lang["safe_functions_at_eval_msg"] = "Met komma's gescheiden lijst";
 
-$_lang["multiple_sessions_msg"]   = "Ter informatie: Meerdere actieve gebruiker sessies (in totaal [+totaal+]) gevonden voor de gebruiker <b>[+gebruikersnaam+]</b>.";
-$_lang["iconv_not_available"]     = "Heb is belangrijk om de extentie iconv te installeren of aan te zetten. Ga na bij uw hostingpartij om deze aan te zetten mocht u hier geen kaas van hebben gegeten.";
+$_lang["multiple_sessions_msg"] = "Ter informatie: Meerdere actieve gebruiker sessies (in totaal [+totaal+]) gevonden voor de gebruiker <b>[+gebruikersnaam+]</b>.";
+$_lang["iconv_not_available"] = "Heb is belangrijk om de extentie iconv te installeren of aan te zetten. Ga na bij uw hostingpartij om deze aan te zetten mocht u hier geen kaas van hebben gegeten.";
 
 $_lang["cm_create_new_category"] = "Creëer een nieuwe categorie";
 $_lang["cm_category_name"] = "Categorie naam";

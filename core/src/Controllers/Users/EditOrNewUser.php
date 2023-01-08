@@ -13,14 +13,6 @@ class EditOrNewUser extends AbstractController implements ManagerTheme\PageContr
     /**
      * {@inheritdoc}
      */
-    public function checkLocked(): ?string
-    {
-        return null;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
     public function canView(): bool
     {
         return $this->managerTheme->getCore()->hasPermission('save_user');
@@ -157,7 +149,7 @@ class EditOrNewUser extends AbstractController implements ManagerTheme\PageContr
             $a = ($userData['stay'] == '2') ? "88&id={$user->getKey()}" : "87";
             $this->parameters['url'] = "index.php?a={$a}&r=2&stay=" . $userData['stay'];
         } else {
-            $this->parameters['url'] = "index.php?a=88&id={$user->getKey()}";
+            $this->parameters['url'] = "index.php?a=99";
         }
         $this->parameters['cancel_url'] = "index.php?a=99";
         if ($userData['passwordnotifymethod'] == 'e') {

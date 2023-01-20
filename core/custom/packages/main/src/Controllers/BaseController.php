@@ -1,6 +1,7 @@
 <?php
 
 namespace EvolutionCMS\Main\Controllers;
+use Illuminate\Support\Facades\Cache;
 
 class BaseController
 {
@@ -14,13 +15,24 @@ class BaseController
 		$this->sendToView();
 	}
 	public function globalElements(){
+		/*
 		$menu = $this->evo->runSnippet('DLMenu',[
 			'parents' => 0,
 			'maxDepth' => 1,
 			'returnDLObject' => 1
 		]);
-		$this->data['menu'] = $menu->getMenu();
 
+		$this->data['menu'] = $menu->getMenu();
+		*/
+
+		$this->data['menu'] = Cache::rememberForever('menu', function () {
+			$menu = $this->evo->runSnippet('DLMenu',[
+				'parents' => 0,
+				'maxDepth' => 1,
+				'returnDLObject' => 1
+			]);
+			return $menu->getMenu();
+		});
 
 		$result = $this->evo->runSnippet('DocLister',[
 			'parents' => 2,

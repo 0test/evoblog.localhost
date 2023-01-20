@@ -99,7 +99,6 @@ class Core extends AbstractLaravel implements Interfaces\CoreInterface
     public $chunkCache = [];
     public $snippetCache = [];
     public $modulesFromFile = [];
-    public $contentTypes;
     public $dumpSQL = false;
     public $queryCode;
     public $placeholders = [];
@@ -410,62 +409,61 @@ class Core extends AbstractLaravel implements Interfaces\CoreInterface
      *
      * @param string $url
      * @param int $count_attempts
-     * @param string $type $type
+     * @param string $type REDIRECT_HEADER(default)|REDIRECT_REFRESH
      * @param string $responseCode
-     * @return bool|null
-     * @global string $base_url
-     * @global string $site_url
+     * @return null|false
+     * @throws \Exception
      */
-    public function sendRedirect($url, $count_attempts = 0, $type = '', $responseCode = '')
+    public function sendRedirect($url, $count_attempts = 0, $type = 'REDIRECT_HEADER', $responseCode = '')
     {
-        $header = '';
-        if (empty($url)) {
+        if (!$url) {
             return false;
         }
-        if ($count_attempts == 1) {
+        if (Str::contains($url, "\n")) {
+            throw new \Exception('No newline allowed in redirect url.');
+        }
+
+        if ($count_attempts) {
             // append the redirect count string to the url
-            $currentNumberOfRedirects = isset($_REQUEST['err']) ? $_REQUEST['err'] : 0;
+            $currentNumberOfRedirects = $_GET['err'] ?? 0;
             if ($currentNumberOfRedirects > 3) {
                 $this->getService('ExceptionHandler')->messageQuit(
-                    'Redirection attempt failed - please ensure the document you\'re trying to redirect to exists.' .
-                    '<p>Redirection URL: <i>' . $url . '</i></p>'
+                    "Redirection attempt failed - please ensure the document you're trying to redirect to exists. <p>Redirection URL: <i>" . $url . '</i></p>'
                 );
-            } else {
-                $currentNumberOfRedirects += 1;
-                if (Str::contains($url, '?')) {
-                    $url .= "&err=$currentNumberOfRedirects";
-                } else {
-                    $url .= "?err=$currentNumberOfRedirects";
-                }
+                exit;
             }
+            $url .= (Str::contains($url, '?') ? '&' : '?') . 'err=' . ($currentNumberOfRedirects + 1);
         }
+
         if ($type === 'REDIRECT_REFRESH') {
-            $header = 'Refresh: 0;URL=' . $url;
-        } elseif ($type === 'REDIRECT_META') {
-            $header = '<META HTTP-EQUIV="Refresh" CONTENT="0; URL=' . $url . '" />';
-            echo $header;
+            header('Refresh: 0;URL=' . $url);
             exit;
-        } elseif ($type === 'REDIRECT_HEADER' || empty($type)) {
-            // check if url has /$base_url
-            if (substr($url, 0, strlen(MODX_BASE_URL)) == MODX_BASE_URL) {
-                // append $site_url to make it work with Location:
-                $url = MODX_SITE_URL . substr($url, strlen(MODX_BASE_URL));
-            }
-            if (!Str::contains($url, "\n")) {
-                $header = 'Location: ' . $url;
-            } else {
-                $this->getService('ExceptionHandler')->messageQuit('No newline allowed in redirect url.');
-            }
         }
-        if ($responseCode && (Str::contains($responseCode, '30'))) {
+        
+        if ($type === 'REDIRECT_META') {
+            echo '<META HTTP-EQUIV="Refresh" CONTENT="0; URL=' . $url . '" />';
+            exit;
+        }
+
+        if ($type === 'REDIRECT_JS') {
+            echo sprintf("<script>window.location.href='%s';</script>", $url);
+            exit;
+        }
+
+        if ($type && $type !== 'REDIRECT_HEADER') {
+            return false;
+        }
+
+        if ($responseCode && Str::contains($responseCode, '30')) {
             header($responseCode);
         }
 
-        if (!empty($header)) {
-            header($header);
-        }
-
-        exit(0);
+        header(
+            strpos($url, MODX_BASE_URL) === 0
+                ? 'Location: ' . MODX_SITE_URL . substr($url, strlen(MODX_BASE_URL))
+                : 'Location: ' . $url
+        );
+        exit;
     }
 
     /**
@@ -476,20 +474,19 @@ class Core extends AbstractLaravel implements Interfaces\CoreInterface
      */
     public function sendForward($id, $responseCode = '')
     {
-        if ($this->forwards > 0) {
-            $this->forwards = $this->forwards - 1;
-            $this->documentIdentifier = $id;
-            $this->documentMethod = 'id';
-            if ($responseCode) {
-                header($responseCode);
-            }
-            $this->prepareResponse();
-            exit();
+        if ($this->forwards <= 0) {
+            $this->getService('ExceptionHandler')->messageQuit("Internal Server Error id={$id}");
+            header('HTTP/1.0 500 Internal Server Error');
+            die('<h1>ERROR: Too many forward attempts!</h1><p>The request could not be completed due to too many unsuccessful forward attempts.</p>');
         }
-
-        $this->getService('ExceptionHandler')->messageQuit("Internal Server Error id={$id}");
-        header('HTTP/1.0 500 Internal Server Error');
-        die('<h1>ERROR: Too many forward attempts!</h1><p>The request could not be completed due to too many unsuccessful forward attempts.</p>');
+        $this->forwards--;
+        $this->documentIdentifier = $id;
+        $this->documentMethod = 'id';
+        if ($responseCode) {
+            header($responseCode);
+        }
+        $this->prepareResponse();
+        exit();
     }
 
     /**
@@ -800,7 +797,7 @@ class Core extends AbstractLaravel implements Interfaces\CoreInterface
 
         // send out content-type and content-disposition headers
         if (IN_PARSER_MODE == "true") {
-            $type = !empty($this->contentTypes[$this->documentIdentifier]) ? $this->contentTypes[$this->documentIdentifier] : "text/html";
+            $type = !empty($this->documentObject['contentType']) ? $this->documentObject['contentType'] : "text/html";
             header('Content-Type: ' . $type . '; charset=' . $this->getConfig('modx_charset'));
             // if (($this->documentIdentifier == $this->config['error_page']) || $redirect_error)
             //   header('HTTP/1.0 404 Not Found');
@@ -2752,7 +2749,9 @@ class Core extends AbstractLaravel implements Interfaces\CoreInterface
                 if (isset(UrlProcessor::getFacadeRoot()->documentListing[$alias])) {
                     $this->documentIdentifier = UrlProcessor::getFacadeRoot()->documentListing[$alias];
                 } else {
+                    $parent = $virtualDir ? UrlProcessor::getIdFromAlias($virtualDir) : 0;
                     $doc = SiteContent::select('id')
+                        ->where('parent', $parent)
                         ->where('alias', $this->documentIdentifier)
                         ->first();
 
@@ -3774,14 +3773,21 @@ class Core extends AbstractLaravel implements Interfaces\CoreInterface
         }
 
         // modify field names to use sc. table reference
-        $fields = 'site_content.' . implode(',site_content.', array_filter(array_map('trim', explode(',', $fields))));
-        $sort = 'site_content.' . implode(',site_content.', array_filter(array_map('trim', explode(',', $sort))));
+        $fields = array_filter(array_map('trim', explode(',', $fields)));
+        foreach ($fields as $key => $value) {
+            if (stristr($value, '.') === false) {
+                $fields[$key] = 'site_content.' . $value;
+            }
+        }
         $content = SiteContent::query()
             ->withTrashed()
-            ->select(explode(',', $fields))
+            ->select($fields)
             ->where('site_content.parent', $id)
-            ->groupBy('site_content.id')
-            ->orderBy($sort, $dir);
+            ->groupBy('site_content.id');
+        if ($sort != '') {
+            $sort = 'site_content.' . implode(',site_content.', array_filter(array_map('trim', explode(',', $sort))));
+            $content = $content->orderBy($sort, $dir);
+        }
         if ($checkAccess) {
             $content->withoutProtected();
         }
@@ -3814,14 +3820,21 @@ class Core extends AbstractLaravel implements Interfaces\CoreInterface
         }
 
         // modify field names to use sc. table reference
-        $fields = 'site_content.' . implode(',site_content.', array_filter(array_map('trim', explode(',', $fields))));
-        $sort = 'site_content.' . implode(',site_content.', array_filter(array_map('trim', explode(',', $sort))));
+        $fields = array_filter(array_map('trim', explode(',', $fields)));
+        foreach ($fields as $key => $value) {
+            if (stristr($value, '.') === false) {
+                $fields[$key] = 'site_content.' . $value;
+            }
+        }
         $content = SiteContent::query()
-            ->select(explode(',', $fields))
+            ->select($fields)
             ->where('site_content.parent', $id)
             ->active()
-            ->groupBy('site_content.id')
-            ->orderBy($sort, $dir);
+            ->groupBy('site_content.id');
+        if ($sort != '') {
+            $sort = 'site_content.' . implode(',site_content.', array_filter(array_map('trim', explode(',', $sort))));
+            $content = $content->orderBy($sort, $dir);
+        }
         if ($checkAccess) {
             $content->withoutProtected();
         }
@@ -3888,16 +3901,19 @@ class Core extends AbstractLaravel implements Interfaces\CoreInterface
         } elseif (is_array($where)) {
             $documentChildren = $documentChildren->where($where);
         }
-        if (!is_array($fields)) {
-            $fields = array_filter(array_map('trim', explode(',', $fields)));
-            $documentChildren = $documentChildren->select($fields);
+
+        $fields = array_filter(array_map('trim', explode(',', $fields)));
+        foreach ($fields as $key => $value) {
+            if (stristr($value, '.') === false) {
+                $fields[$key] = 'site_content.' . $value;
+            }
         }
+        $documentChildren = $documentChildren->select($fields);
+
         // modify field names to use sc. table reference
         if ($sort != '') {
-            $sort = array_filter(array_map('trim', explode(',', $sort)));
-            foreach ($sort as $item) {
-                $documentChildren = $documentChildren->orderBy($item, $dir);
-            }
+            $sort = 'site_content.' . implode(',site_content.', array_filter(array_map('trim', explode(',', $sort))));
+            $documentChildren = $documentChildren->orderBy($sort, $dir);
         }
 
         if ($checkAccess) {
@@ -3971,24 +3987,19 @@ class Core extends AbstractLaravel implements Interfaces\CoreInterface
         } elseif (is_array($where)) {
             $documentChildren = $documentChildren->where($where);
         }
-        if (!is_array($fields)) {
-            $arr = array_filter(array_map('trim', explode(',', $fields)));
-            $new_arr = [];
-            foreach ($arr as $item) {
-                if (stristr($item, '.') === false) {
-                    $new_arr[] = 'site_content.' . $item;
-                } else {
-                    $new_arr[] = $item;
-                }
+
+        $fields = array_filter(array_map('trim', explode(',', $fields)));
+        foreach ($fields as $key => $value) {
+            if (stristr($value, '.') === false) {
+                $fields[$key] = 'site_content.' . $value;
             }
-            $documentChildren = $documentChildren->select($new_arr);
         }
+        $documentChildren = $documentChildren->select($fields);
+
         // modify field names to use sc. table reference
         if ($sort != '') {
-            $sort = array_filter(array_map('trim', explode(',', $sort)));
-            foreach ($sort as $item) {
-                $documentChildren = $documentChildren->orderBy($item, $dir);
-            }
+            $sort = 'site_content.' . implode(',site_content.', array_filter(array_map('trim', explode(',', $sort))));
+            $documentChildren = $documentChildren->orderBy($sort, $dir);
         }
 
         if ($checkAccess) {
@@ -4068,7 +4079,7 @@ class Core extends AbstractLaravel implements Interfaces\CoreInterface
 
         $doc = $this->getDocumentObject('id', $docid);
         if (is_array($doc[$field])) {
-            $tvs = $this->getTemplateVarOutput($field, $docid, 1);
+            $tvs = $this->getTemplateVarOutput($field, $docid, 'all');
             $content = $tvs[$field];
         } else {
             $content = $doc[$field];

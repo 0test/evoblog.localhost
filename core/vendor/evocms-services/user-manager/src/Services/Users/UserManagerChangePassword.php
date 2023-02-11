@@ -41,9 +41,9 @@ class UserManagerChangePassword implements UserServiceInterface
 
     /**
      * UserRegistration constructor.
-     * @param array $userData
-     * @param bool $events
-     * @param bool $cache
+     * @param  array  $userData
+     * @param  bool  $events
+     * @param  bool  $cache
      */
     public function __construct(array $userData, bool $events = true, bool $cache = true)
     {
@@ -70,9 +70,9 @@ class UserManagerChangePassword implements UserServiceInterface
     public function getValidationMessages(): array
     {
         return [
-            'password.required' => Lang::get("global.required_field", ['field' => 'password']),
+            'password.required'  => Lang::get("global.required_field", ['field' => 'password']),
             'password.confirmed' => Lang::get("global.password_confirmed", ['field' => 'password']),
-            'password.min' => Lang::get("global.password_gen_length"),
+            'password.min'       => Lang::get("global.password_gen_length"),
 
         ];
     }
@@ -102,11 +102,11 @@ class UserManagerChangePassword implements UserServiceInterface
         $user->save();
 
         // invoke OnManagerChangePassword event
-        EvolutionCMS()->invokeEvent('OnManagerChangePassword', array(
-            'userid' => $uid,
-            'username' => $_SESSION['mgrShortname'],
+        EvolutionCMS()->invokeEvent('OnManagerChangePassword', [
+            'userid'       => $uid,
+            'username'     => $_SESSION['mgrShortname'],
             'userpassword' => $this->userData['password']
-        ));
+        ]);
         return $user;
     }
 
@@ -127,6 +127,4 @@ class UserManagerChangePassword implements UserServiceInterface
         $this->validateErrors = $validator->errors()->toArray();
         return !$validator->fails();
     }
-
-
 }

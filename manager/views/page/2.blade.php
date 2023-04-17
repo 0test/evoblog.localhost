@@ -109,22 +109,22 @@
 
     $tpl = '
     <table class="table data">
-    	<tr>
-    		<td width="150">[%yourinfo_username%]</td>
-    		<td><b>[+username+]</b></td>
-    	</tr>
-    	<tr>
-    		<td>[%yourinfo_role%]</td>
-    		<td><b>[+role+]</b></td>
-    	</tr>
-    	<tr>
-    		<td>[%yourinfo_previous_login%]</td>
-    		<td><b>[+lastlogin+]</b></td>
-    	</tr>
-    	<tr>
-    		<td>[%yourinfo_total_logins%]</td>
-    		<td><b>[+logincount+]</b></td>
-    	</tr>
+        <tr>
+            <td width="150">[%yourinfo_username%]</td>
+            <td><b>[+username+]</b></td>
+        </tr>
+        <tr>
+            <td>[%yourinfo_role%]</td>
+            <td><b>[+role+]</b></td>
+        </tr>
+        <tr>
+            <td>[%yourinfo_previous_login%]</td>
+            <td><b>[+lastlogin+]</b></td>
+        </tr>
+        <tr>
+            <td>[%yourinfo_total_logins%]</td>
+            <td><b>[+logincount+]</b></td>
+        </tr>
     </table>';
 
     $ph['UserInfo'] = $modx->parseText($tpl, [
@@ -153,22 +153,22 @@
         }
         $timetocheck = $now - 60 * 20; //+$server_offset_time;
         $html = '
-    	<div class="card-body">
-    		[%onlineusers_message%]
-    		<b>[+now+]</b>):
-    	</div>
-    	<div class="table-responsive">
-    	<table class="table data">
-    	<thead>
-    		<tr>
-    			<th>[%onlineusers_user%]</th>
-    			<th>ID</th>
-    			<th>[%onlineusers_ipaddress%]</th>
-    			<th>[%onlineusers_lasthit%]</th>
-    			<th>[%onlineusers_action%]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
-    		</tr>
-    	</thead>
-    	<tbody>';
+        <div class="card-body">
+            [%onlineusers_message%]
+            <b>[+now+]</b>):
+        </div>
+        <div class="table-responsive">
+        <table class="table data">
+        <thead>
+            <tr>
+                <th>[%onlineusers_user%]</th>
+                <th>ID</th>
+                <th>[%onlineusers_ipaddress%]</th>
+                <th>[%onlineusers_lasthit%]</th>
+                <th>[%onlineusers_action%]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
+            </tr>
+        </thead>
+        <tbody>';
 
         $userList = [];
         $userCount = [];
@@ -196,8 +196,8 @@
         }
 
         $html .= '
-    	</tbody>
-    	</table>
+        </tbody>
+        </table>
     </div>
     ';
     }
@@ -212,45 +212,49 @@
     // How many items per Feed?
     $itemsNumber = 3;
 
-    $feedData = [];
 
-    // create Feed
-    $feed = new \SimplePie\SimplePie();
-    $feedCache = evolutionCMS()->getCachePath() . 'rss/';
-    \Illuminate\Support\Facades\File::ensureDirectoryExists($feedCache);
-    $feed->set_cache_location($feedCache);
-    foreach ($urls as $section => $url) {
-        if (empty($url)) {
-            continue;
-        }
-        $output = '';
-        $feed->set_feed_url($url);
-        $feed->init();
-        $items = $feed->get_items(0, $itemsNumber);
-        if (empty($items)) {
-            $feedData[$section] = 'Failed to retrieve ' . $url;
-            continue;
-        }
-        $output = '<ul>';
-        foreach ($items as $item) {
-            $href = $item->get_link();
-            $title = $item->get_title();
-            $pubdate = $item->get_date();
-            $pubdate = $modx->toDateFormat(strtotime($pubdate));
-            $description = strip_tags($item->get_content());
-            if (strlen($description) > 199) {
-                $description = \Illuminate\Support\Str::words($description, 15, '...');
-                $description .= '<br />Read <a href="' . $href . '" target="_blank">more</a>.';
+    $feedData = cache()->remember('feeddata', 24 * 3600, function() use ($modx, $urls, $itemsNumber) {
+        // create Feed
+        $feedData = [];
+        $feed = new \SimplePie\SimplePie();
+        $feedCache = evolutionCMS()->getCachePath() . 'rss/';
+        \Illuminate\Support\Facades\File::ensureDirectoryExists($feedCache);
+        $feed->set_cache_location($feedCache);
+        $feed->set_cache_duration(24 * 3600);
+        foreach ($urls as $section => $url) {
+            if (empty($url)) {
+                continue;
             }
-            $output .= '<li><a href="' . $href . '" target="_blank">' . $title . '</a> - <b>' . $pubdate . '</b><br />' . $description . '</li>';
+            $output = '';
+            $feed->set_feed_url($url);
+            $feed->init();
+            $items = $feed->get_items(0, $itemsNumber);
+            if (empty($items)) {
+                $feedData[$section] = 'Failed to retrieve ' . $url;
+                continue;
+            }
+            $output = '<ul>';
+            foreach ($items as $item) {
+                $href = $item->get_link();
+                $title = $item->get_title();
+                $pubdate = $item->get_date();
+                $pubdate = $modx->toDateFormat(strtotime($pubdate));
+                $description = strip_tags($item->get_content());
+                if (strlen($description) > 199) {
+                    $description = \Illuminate\Support\Str::words($description, 15, '...');
+                    $description .= '<br />Read <a href="' . $href . '" target="_blank">more</a>.';
+                }
+                $output .= '<li><a href="' . $href . '" target="_blank">' . $title . '</a> - <b>' . $pubdate . '</b><br />' . $description . '</li>';
+            }
+            $output .= '</ul>';
+            $feedData[$section] = $output;
         }
-        $output .= '</ul>';
-        $feedData[$section] = $output;
-    }
+
+        return $feedData;
+    });
 
     $ph['modx_security_notices_content'] = $feedData['modx_security_notices_content'];
     $ph['modx_news_content'] = $feedData['modx_news_content'];
-
     $ph['theme'] = $modx->getConfig('manager_theme');
     $ph['site_name'] = $modx->getPhpCompat()->entities($modx->getConfig('site_name'));
     $ph['home'] = $_lang['home'];
@@ -412,7 +416,7 @@
             '
                     </table>
                 </div>
-    		',
+            ',
         'hide' => '0',
     ];
     $widgets['onlineinfo'] = [

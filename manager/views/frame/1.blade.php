@@ -242,8 +242,9 @@
                             <li id="preview">
                                 <a href="../" target="_blank" title="{{ ManagerTheme::getLexicon('preview') }}">
                                     <i class="{{ $_style['icon_desktop'] }} position-relative">
-                                        @if(!$modx->getConfig('site_status'))
-                                            <i class="fa fa-exclamation-triangle site-status" title="{{ $modx->getConfig('site_unavailable_message') }}"></i>
+                                        @if (!$modx->getConfig('site_status'))
+                                            <i class="fa fa-exclamation-triangle site-status"
+                                                title="{{ $modx->getConfig('site_unavailable_message') }}"></i>
                                         @endif
                                     </i>
                                 </a>
@@ -260,7 +261,6 @@
                                     @endif
                                 </a>
                                 <ul class="dropdown-menu">
-
                                     @if ($modx->hasPermission('change_password'))
                                         <li>
                                             <a onclick="" href="index.php?a=28" target="main">
@@ -277,10 +277,11 @@
                                     </li>
                                 </ul>
                             </li>
-                            @if ($modx->hasPermission('settings') ||
-                                $modx->hasPermission('view_eventlog') ||
-                                $modx->hasPermission('logs') ||
-                                $modx->hasPermission('help'))
+                            @if (
+                                $modx->hasPermission('settings') ||
+                                    $modx->hasPermission('view_eventlog') ||
+                                    $modx->hasPermission('logs') ||
+                                    $modx->hasPermission('help'))
                                 <li id="system" class="dropdown">
                                     <a href="javascript:;" class="dropdown-toggle"
                                         title="{{ ManagerTheme::getLexicon('system') }}" onclick="return false;"><i
@@ -324,15 +325,6 @@
                                                 </a>
                                             </li>
                                         @endif
-                                        @if ($modx->hasPermission('help'))
-                                            <li>
-                                                <a href="index.php?a=9" target="main">
-                                                    <i
-                                                        class="{{ $_style['icon_question_circle'] }}"></i>{{ ManagerTheme::getLexicon('help') }}
-                                                </a>
-                                            </li>
-                                        @endif
-
                                         <?php
                                         $style = $modx->getConfig('settings_version') !== $modx->getVersionData('version') ? 'style="color:#ffff8a;"' : '';
                                         $version = 'Evolution CE';
@@ -533,10 +525,11 @@
 
         <script type="text/javascript">
             if (document.getElementById('treeMenu')) {
-                @if ($modx->hasPermission('edit_template') ||
-                    $modx->hasPermission('edit_snippet') ||
-                    $modx->hasPermission('edit_chunk') ||
-                    $modx->hasPermission('edit_plugin'))
+                @if (
+                    $modx->hasPermission('edit_template') ||
+                        $modx->hasPermission('edit_snippet') ||
+                        $modx->hasPermission('edit_chunk') ||
+                        $modx->hasPermission('edit_plugin'))
 
                     document.getElementById('treeMenu_openelements').onclick = function(e) {
                         e.preventDefault();

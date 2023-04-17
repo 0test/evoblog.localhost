@@ -2753,6 +2753,9 @@ class Core extends AbstractLaravel implements Interfaces\CoreInterface
                     $this->documentIdentifier = UrlProcessor::getFacadeRoot()->documentListing[$alias];
                 } else {
                     $parent = $virtualDir ? UrlProcessor::getIdFromAlias($virtualDir) : 0;
+                    if($parent === null) {
+                        $this->sendErrorPage();
+                    }
                     $doc = SiteContent::select('id')
                         ->where('parent', $parent)
                         ->where('alias', $this->documentIdentifier)
@@ -2767,16 +2770,18 @@ class Core extends AbstractLaravel implements Interfaces\CoreInterface
                         $docs = SiteContent::select('id', 'parent')
                             ->where('alias', $this->documentIdentifier)
                             ->get();
+                        $found = false;
                         foreach ($docs as $doc) {
                             $tmp_parent = $doc->parent;
                             while(isset($hidden[$tmp_parent])) {
                                 $tmp_parent = $hidden[$tmp_parent];
                             }
                             if($parent == $tmp_parent) {
+                                $found = true;
                                 break;
                             }
                         }
-                        if(is_null($doc)) $this->sendErrorPage();
+                        if(is_null($doc) || !$found) $this->sendErrorPage();
                     }
 
                     $this->documentIdentifier = $doc->getKey();

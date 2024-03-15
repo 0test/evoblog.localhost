@@ -91,7 +91,7 @@ EOT
         [$errors, $publishErrors, $warnings] = $validator->validate($file, $checkAll, $checkVersion);
 
         $lockErrors = [];
-        $composer = Factory::create($io, $file, $input->hasParameterOption('--no-plugins'));
+        $composer = $this->createComposerInstance($input, $io, $file);
         // config.lock = false ~= implicit --no-check-lock; --check-lock overrides
         $checkLock = ($checkLock && $composer->getConfig()->get('lock')) || $input->getOption('check-lock');
         $locker = $composer->getLocker();
@@ -106,12 +106,15 @@ EOT
         $this->outputResult($io, $file, $errors, $warnings, $checkPublish, $publishErrors, $checkLock, $lockErrors, true);
 
         // $errors include publish and lock errors when exists
-        $exitCode = $errors ? 2 : ($isStrict && $warnings ? 1 : 0);
+        $exitCode = count($errors) > 0 ? 2 : (($isStrict && count($warnings) > 0) ? 1 : 0);
 
         if ($input->getOption('with-dependencies')) {
             $localRepo = $composer->getRepositoryManager()->getLocalRepository();
             foreach ($localRepo->getPackages() as $package) {
                 $path = $composer->getInstallationManager()->getInstallPath($package);
+                if (null === $path) {
+                    continue;
+                }
                 $file = $path . '/composer.json';
                 if (is_dir($path) && file_exists($file)) {
                     [$errors, $publishErrors, $warnings] = $validator->validate($file, $checkAll, $checkVersion);
@@ -119,7 +122,7 @@ EOT
                     $this->outputResult($io, $package->getPrettyName(), $errors, $warnings, $checkPublish, $publishErrors);
 
                     // $errors include publish errors when exists
-                    $depCode = $errors ? 2 : ($isStrict && $warnings ? 1 : 0);
+                    $depCode = count($errors) > 0 ? 2 : (($isStrict && count($warnings) > 0) ? 1 : 0);
                     $exitCode = max($depCode, $exitCode);
                 }
             }

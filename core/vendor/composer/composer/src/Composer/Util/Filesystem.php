@@ -133,6 +133,7 @@ class Filesystem
      *
      * @throws \RuntimeException
      * @return PromiseInterface
+     * @phpstan-return PromiseInterface<bool>
      */
     public function removeDirectoryAsync(string $directory)
     {
@@ -250,10 +251,27 @@ class Filesystem
                     $directory.' exists and is not a directory.'
                 );
             }
+
+            if (is_link($directory) && !@$this->unlinkImplementation($directory)) {
+                throw new \RuntimeException('Could not delete symbolic link '.$directory.': '.(error_get_last()['message'] ?? ''));
+            }
+
             if (!@mkdir($directory, 0777, true)) {
-                throw new \RuntimeException(
-                    $directory.' does not exist and could not be created.'
-                );
+                $e = new \RuntimeException($directory.' does not exist and could not be created: '.(error_get_last()['message'] ?? ''));
+
+                // in pathological cases with paths like path/to/broken-symlink/../foo is_dir will fail to detect path/to/foo
+                // but normalizing the ../ away first makes it work so we attempt this just in case, and if it still fails we
+                // report the initial error we had with the original path, and ignore the normalized path exception
+                // see https://github.com/composer/composer/issues/11864
+                $normalized = $this->normalizePath($directory);
+                if ($normalized !== $directory) {
+                    try {
+                        $this->ensureDirectoryExists($normalized);
+                        return;
+                    } catch (\Throwable $ignoredEx) {}
+                }
+
+                throw $e;
             }
         }
     }
@@ -345,6 +363,9 @@ class Filesystem
      */
     public function copy(string $source, string $target)
     {
+        // refs https://github.com/composer/composer/issues/11864
+        $target = $this->normalizePath($target);
+
         if (!is_dir($source)) {
             return copy($source, $target);
         }
@@ -784,6 +805,12 @@ class Filesystem
         if (!is_dir($target)) {
             throw new IOException(sprintf('Cannot junction to "%s" as it is not a directory.', $target), 0, null, $target);
         }
+
+        // Removing any previously junction to ensure clean execution.
+        if (!is_dir($junction) || $this->isJunction($junction)) {
+            @rmdir($junction);
+        }
+
         $cmd = sprintf(
             'mklink /J %s %s',
             ProcessExecutor::escape(str_replace('/', DIRECTORY_SEPARATOR, $junction)),
@@ -867,10 +894,8 @@ class Filesystem
 
     /**
      * Copy file using stream_copy_to_stream to work around https://bugs.php.net/bug.php?id=6463
-     *
-     * @return void
      */
-    public function safeCopy(string $source, string $target)
+    public function safeCopy(string $source, string $target): void
     {
         if (!file_exists($target) || !file_exists($source) || !$this->filesAreEqual($source, $target)) {
             $sourceHandle = fopen($source, 'r');
@@ -881,6 +906,8 @@ class Filesystem
             stream_copy_to_stream($sourceHandle, $targetHandle);
             fclose($sourceHandle);
             fclose($targetHandle);
+
+            touch($target, (int) filemtime($source), (int) fileatime($source));
         }
     }
 

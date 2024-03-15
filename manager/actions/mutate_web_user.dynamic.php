@@ -83,7 +83,6 @@ if ($modx->getManagerApi()->action == '88') {
 } else {
     $_SESSION['itemname'] = $_lang["new_web_user"];
 }
-
 // avoid doubling htmlspecialchars (already encoded in DB)
 foreach ($userdata as $key => $val) {
     $userdata[$key] = html_entity_decode($val ?? '', ENT_NOQUOTES, $modx->getConfig('modx_charset'));
@@ -112,6 +111,20 @@ if ($modx->getManagerApi()->hasFormValues()) {
         $usersettings['allowed_days'] = '';
     }
     extract($usersettings, EXTR_OVERWRITE);
+}
+
+if (isset($_REQUEST['newrole'])) {
+    if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+        $query['a'] = $modx->getManagerApi()->action;
+        if ($user) {
+            $query['id'] = $user;
+        }
+        $query['newrole'] = $_REQUEST['newrole'];
+        $modx->getManagerApi()->saveFormValues(87);
+        redirect('index.php?' . http_build_query($query))->send();
+    } else {
+        $userdata['role'] = $_REQUEST['newrole'];
+    }
 }
 
 // include the country list language file
@@ -156,7 +169,7 @@ function changeblockstate(el, checkelement) {
             document.userform.blockeduntil.value = "";
             document.userform.blockedafter.value = "";
             document.userform.failedlogincount.value = 0;
-            blocked.innerHTML = "<b><?php echo $_lang['unblock_message']; ?></b>";
+            blocked.innerHTML = <?=json_encode('<b>'.ManagerTheme::getLexicon('unblock_message').'</b>', JSON_UNESCAPED_SLASHES)?>;
             blocked.className = "TD";
             el.value = 0;
         } else {
@@ -165,7 +178,7 @@ function changeblockstate(el, checkelement) {
     } else {
         if(confirm("<?php echo $_lang['confirm_block']; ?>") === true) {
             document.userform.blocked.value = 1;
-            blocked.innerHTML = "<b><?php echo $_lang['block_message']; ?></b>";
+            blocked.innerHTML = <?=json_encode('<b>'.ManagerTheme::getLexicon('unblock_message').'</b>', JSON_UNESCAPED_SLASHES)?>;
             blocked.className = "warning";
             el.value = 1;
         } else {
@@ -212,6 +225,54 @@ function showHide(what, onoff) {
     }
 };
 
+var curRole = -1;
+var curRoleIndex = 0;
+
+function storeCurRole() {
+    var dropRole = document.getElementById('role');
+    if(dropRole) {
+        for(var i = 0; i < dropRole.length; i++) {
+            if(dropRole[i].selected) {
+                curRole = dropRole[i].value;
+                curRoleIndex = i;
+            }
+        }
+    }
+}
+
+var newRole;
+
+function roleWarning() {
+    var dropRole = document.getElementById('role');
+    if(dropRole) {
+        for(var i = 0; i < dropRole.length; i++) {
+            if(dropRole[i].selected) {
+                newRole = dropRole[i].value;
+                break;
+            }
+        }
+    }
+    if(curRole === newRole) {
+        return;
+    }
+
+    if(documentDirty === true) {
+        if(confirm('<?= $_lang['tmplvar_change_template_msg']?>')) {
+            documentDirty = false;
+            document.userform.a.value = <?= $user ? 88 : 87 ?>;
+            document.userform.newrole.value = newRole;
+            document.userform.submit();
+        } else {
+            dropRole[curRoleIndex].selected = true;
+        }
+    }
+    else {
+        document.userform.a.value = <?= $user ? 88 : 87 ?>;;
+        document.userform.newrole.value = newRole;
+        document.userform.submit();
+    }
+}
+
 var actions = {
     save: function() {
         documentDirty = false;
@@ -233,7 +294,7 @@ var actions = {
 function evoRenderTvImageCheck(a) {
     var b = document.getElementById('image_for_' + a.target.id),
         c = new Image;
-    a.target.value ? (c.src = "<?php echo evo()->getConfig('site_url') ?>" + a.target.value, c.onerror = function () {
+    a.target.value ? (c.src = (a.target.value.search(/^https?:\/\//i) < 0 ? "<?php echo evo()->getConfig('site_url')?>" : '') + a.target.value, c.onerror = function () {
         b.style.backgroundImage = '', b.setAttribute('data-image', '');
     }, c.onload = function () {
         b.style.backgroundImage = 'url(\'' + this.src + '\')', b.setAttribute('data-image', this.src);
@@ -242,7 +303,10 @@ function evoRenderTvImageCheck(a) {
 </script>
 
 <form name="userform" method="post" action="index.php">
-<?php
+    <?php
+        echo csrf_field()->toHtml();
+    ?>
+    <?php
 // invoke OnWUsrFormPrerender event
 $evtOut = $modx->invokeEvent("OnUserFormPrerender", array("id" => $user));
 if (is_array($evtOut)) {
@@ -252,6 +316,7 @@ if (is_array($evtOut)) {
     <input type="hidden" name="a" value="89">
     <input type="hidden" name="mode" value="<?php echo $modx->getManagerApi()->action; ?>" />
     <input type="hidden" name="id" value="<?php echo $user ?>" />
+    <input type="hidden" name="newrole" value="" />
     <input type="hidden" name="blockedmode" value="<?php echo ($userdata['blocked'] == 1 || ($userdata['blockeduntil'] > time() && $userdata['blockeduntil'] != 0) || ($userdata['blockedafter'] < time() && $userdata['blockedafter'] != 0) || $userdata['failedlogins'] > $modx->getConfig('failed_login_attempts')) ? "1" : "0" ?>" />
 
     <h1>
@@ -279,6 +344,32 @@ if (is_array($evtOut)) {
                         <br /></td>
                     </tr>
                     <?php }?>
+                    <tr>
+                        <td><?php echo $_lang['user_role']; ?>:</td>
+                        <td>
+<?php
+$roles = \EvolutionCMS\Models\UserRole::query()->select('name', 'id');
+if (!$modx->hasPermission('save_role')) {
+    $roles = $roles->where('id', '!=', 1);
+}
+?>
+                            <select name="role" id="role" class="inputBox" onChange="roleWarning();" style="width:300px">
+                                <option value="0" <?php $userdata['role'] == 0 ? "selected='selected'" : ''?>><?php echo $_lang['no_user_role']; ?></option>
+<?php
+foreach ($roles->get()->toArray() as $row) {
+    if ($modx->getManagerApi()->action == '11') {
+        $selectedtext = $row['id'] == '1' ? ' selected="selected"' : '';
+    } else {
+        $selectedtext = $row['id'] == $userdata['role'] ? "selected='selected'" : '';
+    }
+    ?>
+                                <option value="<?php echo $row['id']; ?>"<?php echo $selectedtext; ?>><?php echo e($row['name']); ?></option>
+<?php
+}
+?>
+                            </select>
+                        </td>
+                    </tr>
                     <?php if (!empty($userdata['id'])) {?>
                         <tr id="showname" style="display: <?php echo ($modx->getManagerApi()->action == '88' && (!isset($usernamedata['oldusername']) || $usernamedata['oldusername'] == $usernamedata['username'])) ? $displayStyle : 'none'; ?> ">
                             <td><?php echo $_lang['username']; ?>:</td>
@@ -346,32 +437,6 @@ if (is_array($evtOut)) {
                         <td><?php echo $_lang['user_email']; ?>:</td>
                         <td><input type="text" name="email" class="inputBox" value="<?php echo isset($_POST['email']) ? $_POST['email'] : $userdata['email']; ?>" onChange="documentDirty=true;" />
                             <input type="hidden" name="oldemail" value="<?php echo $modx->getPhpCompat()->htmlspecialchars(!empty($userdata['oldemail']) ? $userdata['oldemail'] : $userdata['email']); ?>" /></td>
-                    </tr>
-                    <tr>
-                        <td><?php echo $_lang['user_role']; ?>:</td>
-                        <td>
-<?php
-$roles = \EvolutionCMS\Models\UserRole::query()->select('name', 'id');
-if (!$modx->hasPermission('save_role')) {
-    $roles = $roles->where('id', '!=', 1);
-}
-?>
-                            <select name="role" class="inputBox" onChange='documentDirty=true;' style="width:300px">
-                                <option value="0" <?php $userdata['role'] == 0 ? "selected='selected'" : ''?>><?php echo $_lang['no_user_role']; ?></option>
-<?php
-foreach ($roles->get()->toArray() as $row) {
-    if ($modx->getManagerApi()->action == '11') {
-        $selectedtext = $row['id'] == '1' ? ' selected="selected"' : '';
-    } else {
-        $selectedtext = $row['id'] == $userdata['role'] ? "selected='selected'" : '';
-    }
-    ?>
-                                <option value="<?php echo $row['id']; ?>"<?php echo $selectedtext; ?>><?php echo e($row['name']); ?></option>
-<?php
-}
-?>
-                            </select>
-                        </td>
                     </tr>
                     <tr>
                         <td><?php echo $_lang['user_phone']; ?>:</td>
@@ -1005,14 +1070,14 @@ if (is_array($evtOut)) {
                 <script type="text/javascript">tpUser.addTabPage(document.getElementById("tabPhoto"));</script>
                     <?php
 $out = '';
-if (isset($_POST['photo'])) {
-    if ((strpos($_POST['photo'], "http://") === false)) {
+if (isset($_POST['photo']) && is_scalar($_POST['photo'])) {
+    if (preg_match('#^https?://#i', $_POST['photo']) == false) {
         $out = MODX_SITE_URL;
     }
     $out .= $_POST['photo'];
 } else {
     if (!empty($userdata['photo'])) {
-        if ((strpos($userdata['photo'], "http://") === false)) {
+        if (preg_match('#^https?://#i', $userdata['photo']) == false) {
             $out = MODX_SITE_URL;
         }
         $out .= $userdata['photo'];
@@ -1071,3 +1136,6 @@ if (is_array($evtOut)) {
     </div>
     <input type="submit" name="save" style="display:none">
 </form>
+<script type="text/javascript">
+    storeCurRole();
+</script>

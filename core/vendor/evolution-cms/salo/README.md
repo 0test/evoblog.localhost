@@ -2,7 +2,7 @@
 
 #use
 
-`php core/artisan  salo:install` - for create docker-compose.yml file
+`php core/artisan salo:install` - for create docker-compose.yml file
 
 `./core/vendor/bin/salo up` - run docker demon mode
 

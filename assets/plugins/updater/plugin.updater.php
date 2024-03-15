@@ -21,6 +21,7 @@ $wdgVisibility = isset($wdgVisibility) ? $wdgVisibility : '';
 $ThisRole = isset($ThisRole) ? $ThisRole : '';
 $ThisUser = isset($ThisUser) ? $ThisUser : '';
 $version = isset($version) ? $version : 'evocms-community/evolution';
+$version = str_replace('evolution-cms/evolution', 'evocms-community/evolution', $version);
 $type = isset($type) ? $type : 'tags';
 $showButton = isset($showButton) ? $showButton : 'AdminOnly';
 $result = '';
@@ -384,6 +385,15 @@ if (is_file(__DIR__ . "/assets/cache/siteManager.php")) {
     }
     // echo __DIR__."/temp/".$dir."/".MGR_DIR;
 }
+removeFolder(__DIR__ . "/core/vendor/");
+removeFolder(__DIR__ . "/core/database/");
+removeFolder(__DIR__ . "/core/factory/");
+removeFolder(__DIR__ . "/core/functions/");
+removeFolder(__DIR__ . "/core/includes/");
+removeFolder(__DIR__ . "/core/lang/");
+removeFolder(__DIR__ . "/core/modifiers/");
+removeFolder(__DIR__ . "/core/src/");
+removeFolder(__DIR__ . "/core/storage/");
 copyFolder(__DIR__ . "/temp/" . $dir, __DIR__ . "/");
 removeFolder(__DIR__ . "/temp");
 unlink(__DIR__ . "/evo.zip");

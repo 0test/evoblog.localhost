@@ -17,6 +17,8 @@ use Composer\Pcre\Preg;
 use Composer\Semver\Constraint\Constraint;
 use Composer\Package\Version\VersionParser;
 use Composer\Repository\PlatformRepository;
+use Composer\Semver\Constraint\MatchNoneConstraint;
+use Composer\Semver\Intervals;
 use Composer\Spdx\SpdxLicenses;
 
 /**
@@ -191,7 +193,7 @@ class ValidatingArrayLoader implements LoaderInterface
         }
 
         if ($this->validateArray('support') && !empty($this->config['support'])) {
-            foreach (['issues', 'forum', 'wiki', 'source', 'email', 'irc', 'docs', 'rss', 'chat'] as $key) {
+            foreach (['issues', 'forum', 'wiki', 'source', 'email', 'irc', 'docs', 'rss', 'chat', 'security'] as $key) {
                 if (isset($this->config['support'][$key]) && !is_string($this->config['support'][$key])) {
                     $this->errors[] = 'support.'.$key.' : invalid value, must be a string';
                     unset($this->config['support'][$key]);
@@ -208,7 +210,7 @@ class ValidatingArrayLoader implements LoaderInterface
                 unset($this->config['support']['irc']);
             }
 
-            foreach (['issues', 'forum', 'wiki', 'source', 'docs', 'chat'] as $key) {
+            foreach (['issues', 'forum', 'wiki', 'source', 'docs', 'chat', 'security'] as $key) {
                 if (isset($this->config['support'][$key]) && !$this->filterUrl($this->config['support'][$key])) {
                     $this->warnings[] = 'support.'.$key.' : invalid value ('.$this->config['support'][$key].'), must be an http/https URL';
                     unset($this->config['support'][$key]);
@@ -251,7 +253,7 @@ class ValidatingArrayLoader implements LoaderInterface
             if ($this->validateArray($linkType) && isset($this->config[$linkType])) {
                 foreach ($this->config[$linkType] as $package => $constraint) {
                     $package = (string) $package;
-                    if (0 === strcasecmp($package, $this->config['name'])) {
+                    if (isset($this->config['name']) && 0 === strcasecmp($package, $this->config['name'])) {
                         $this->errors[] = $linkType.'.'.$package.' : a package cannot set a '.$linkType.' on itself';
                         unset($this->config[$linkType][$package]);
                         continue;
@@ -289,6 +291,11 @@ class ValidatingArrayLoader implements LoaderInterface
                             && (new Constraint('>=', '1.0.0.0-dev'))->matches($linkConstraint)
                         ) {
                             $this->warnings[] = $linkType.'.'.$package.' : exact version constraints ('.$constraint.') should be avoided if the package follows semantic versioning';
+                        }
+
+                        $compacted = Intervals::compactConstraint($linkConstraint);
+                        if ($compacted instanceof MatchNoneConstraint) {
+                            $this->warnings[] = $linkType.'.'.$package.' : this version constraint cannot possibly match anything ('.$constraint.')';
                         }
                     }
 

@@ -717,6 +717,7 @@ if (! function_exists('renderFormElement')) {
 
         $field_html = '';
         $cimode = strpos($field_type, ':');
+        static $i = 0;
         if ($cimode === false) {
             switch ($field_type) {
                 case "text": // handler for regular text boxes
@@ -825,7 +826,6 @@ if (! function_exists('renderFormElement')) {
                     $index_list = ParseIntputOptions(ProcessTVCommand($field_elements, $field_id, '', 'tvform',
                         $tvsArray));
                     $tpl = '<label class="checkbox"><input type="checkbox" value="%s" id="tv_%s" name="tv%s[]" %s onchange="documentDirty=true;" />%s</label><br />';
-                    static $i = 0;
                     $_ = array();
                     foreach ($index_list as $c => $item) {
                         if (is_array($item)) {
@@ -854,7 +854,6 @@ if (! function_exists('renderFormElement')) {
                 case "option": // handles radio buttons
                     $index_list = ParseIntputOptions(ProcessTVCommand($field_elements, $field_id, '', 'tvform',
                         $tvsArray));
-                    static $i = 0;
                     foreach($index_list as $item => $itemvalue) {
                         [$item, $itemvalue] = (is_array($itemvalue)) ? $itemvalue : array_merge(explode("==", $itemvalue), ['']);
                         if (strlen($itemvalue) == 0) {
@@ -895,7 +894,7 @@ if (! function_exists('renderFormElement')) {
                     }
                     $field_html .= '<input type="text" id="tv' . $field_id . '" name="tv' . $field_id . '"  value="' . $field_value . '" ' . $field_style . ' onchange="documentDirty=true;" /><input type="button" value="' . ManagerTheme::getLexicon('insert') . '" onclick="BrowseServer(\'tv' . $field_id . '\')" />
                     <div class="col-12" style="padding-left: 0px;">
-                        <div id="image_for_tv' . $field_id . '" class="image_for_field" data-image="' . $field_value . '" onclick="BrowseServer(\'tv' . $field_id . '\')" style="' . $size . 'background-image: url(\'' . evo()->getConfig('site_url') . $image . '\');"></div>
+                        <div id="image_for_tv' . $field_id . '" class="image_for_field" data-image="' . $field_value . '" onclick="BrowseServer(\'tv' . $field_id . '\')" style="' . $size . 'background-image: url(\'' . (preg_match('#^https?://#i', $image) == false ? evo()->getConfig('site_url') : ''). $image . '\');"></div>
                         <script>document.getElementById(\'tv' . $field_id . '\').addEventListener(\'change\', evoRenderTvImageCheck, false);</script>
                     </div>';
                     break;

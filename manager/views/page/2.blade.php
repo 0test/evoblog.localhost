@@ -82,7 +82,7 @@
 
     if (!$modx->getConfig('site_status') && $modx->hasPermission('settings')) {
         $ph['show_site_status'] = 'block';
-        $ph['site_status_msg'] = $modx->getConfig('site_unavailable_message') . ' ' . __('global.update_settings_from_language') . ' <a href="?a=17&tab=0" target="main" class="btn btn-sm btn-success">' . __('global.online') . '</a>';
+        $ph['site_status_msg'] = strip_tags($modx->getConfig('site_unavailable_message')) . ' ' . __('global.update_settings_from_language') . ' <a href="?a=17&tab=0" target="main" class="btn btn-sm btn-success">' . __('global.online') . '</a>';
     } else {
         $ph['show_site_status'] = 'none';
     }
@@ -108,7 +108,7 @@
     $ph['RecentInfo'] = $modx->getChunk('manager#welcome\RecentInfo');
 
     $tpl = '
-    <table class="table data">
+    <table class="">
         <tr>
             <td width="150">[%yourinfo_username%]</td>
             <td><b>[+username+]</b></td>
@@ -127,11 +127,12 @@
         </tr>
     </table>';
 
+    $loginCount = $_SESSION['mgrLogincount'] + 1;
     $ph['UserInfo'] = $modx->parseText($tpl, [
         'username' => $modx->getLoginUserName(),
         'role' => $_SESSION['mgrPermissions']['name'],
-        'lastlogin' => $modx->toDateFormat($modx->timestamp($_SESSION['mgrLastlogin'])),
-        'logincount' => $_SESSION['mgrLogincount'] + 1,
+        'lastlogin' => $loginCount > 1 ? $modx->toDateFormat($modx->timestamp($_SESSION['mgrLastlogin'])) : '-',
+        'logincount' => $loginCount,
     ]);
 
     $activeUsers = \EvolutionCMS\Models\ActiveUserSession::query()
@@ -213,20 +214,17 @@
     $itemsNumber = 3;
 
 
-    $feedData = cache()->remember('feeddata', 24 * 3600, function() use ($modx, $urls, $itemsNumber) {
+    $feedData = cache()->store('rss')->remember('feeddata', 24 * 3600, function() use ($modx, $urls, $itemsNumber) {
         // create Feed
         $feedData = [];
         $feed = new \SimplePie\SimplePie();
-        $feedCache = evolutionCMS()->getCachePath() . 'rss/';
-        \Illuminate\Support\Facades\File::ensureDirectoryExists($feedCache);
-        $feed->set_cache_location($feedCache);
-        $feed->set_cache_duration(24 * 3600);
         foreach ($urls as $section => $url) {
             if (empty($url)) {
                 continue;
             }
             $output = '';
             $feed->set_feed_url($url);
+            $feed->enable_cache(false);
             $feed->init();
             $items = $feed->get_items(0, $itemsNumber);
             if (empty($items)) {
@@ -253,8 +251,8 @@
         return $feedData;
     });
 
-    $ph['modx_security_notices_content'] = $feedData['modx_security_notices_content'];
-    $ph['modx_news_content'] = $feedData['modx_news_content'];
+    $ph['modx_security_notices_content'] = $feedData['modx_security_notices_content'] ?? [];
+    $ph['modx_news_content'] = $feedData['modx_news_content'] ?? [];
     $ph['theme'] = $modx->getConfig('manager_theme');
     $ph['site_name'] = $modx->getPhpCompat()->entities($modx->getConfig('site_name'));
     $ph['home'] = $_lang['home'];
@@ -389,32 +387,7 @@
                     </span>
                 </div>
                 <div class="userprofiletable card-body">
-                    <table>
-                        <tr>
-                            <td width="150">[%yourinfo_username%]</td>
-                            <td><b>' .
-            $modx->getLoginUserName() .
-            '</b></td>
-                        </tr>
-                        <tr>
-                            <td>[%yourinfo_role%]</td>
-                            <td><b>[[$_SESSION[\'mgrPermissions\'][\'name\'] ]]</b></td>
-                        </tr>
-                        <tr>
-                            <td>[%yourinfo_previous_login%]</td>
-                            <td><b>[[$_SESSION[\'mgrLastlogin\']:math(\'%s+[(server_offset_time)]\'):dateFormat]]</b></td>
-                        </tr>
-                        <tr>
-                            <td>[%yourinfo_total_logins%]</td>
-                            <td><b>[[$_SESSION[\'mgrLogincount\']:math(\'%s+1\')]]</b></td>
-                        </tr>' .
-            ($modx->hasPermission('change_password')
-                ? '
-
-                        '
-                : '') .
-            '
-                    </table>
+                    [+UserInfo+]
                 </div>
             ',
         'hide' => '0',

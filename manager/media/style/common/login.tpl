@@ -55,11 +55,17 @@
             0% { opacity: 0; -webkit-transform: scale3d(.3, .3, .3); transform: scale3d(.3, .3, .3); }
             50% { opacity: 1; }
             }
+        #messages, span.error {
+            display: block;
+            color:red;
+            margin-bottom:5px;
+        }
     </style>
 </head>
 <body>
 <div id="mx_loginbox">
     <form method="post" name="loginfrm" id="loginfrm" action="processors/login.processor.php">
+        [+csrf+]
         [+OnManagerLoginFormPrerender+]
         <fieldset>
             <div class="text-center">
@@ -78,14 +84,15 @@
             <div class="form-footer">
                 <button type="submit" name="submitButton" class="login" id="submitButton">[%login_button%]</button>
             </div>
+            <div id="messages"></div>
             [+OnManagerLoginFormRender+]
         </fieldset>
     </form>
 </div>
 <p class="loginLicense"></p>
-<div class="gpl">&copy; 2005-2022 by the <a href="https://evocms.ru/" target="_blank">Evolution CMS</a>. <strong>Evolution CMS</strong>&trade; is licensed under the GPL.</div>
+<div class="gpl">&copy; 2005-2023 by the <a href="https://evocms.ru/" target="_blank">Evolution CMS</a>. <strong>Evolution CMS</strong>&trade; is licensed under the GPL.</div>
 </body>
-<script type="text/javascript">
+<script>
     /* <![CDATA[ */
     if(window.frames.length) {
         window.location = self.document.location;
@@ -97,24 +104,29 @@
         form.username.focus()
     }
     form.onsubmit = function(e) {
-        form.submitButton.classList.add('scaleX');
+        document.getElementById('mainloader').classList.add('show');
+        document.getElementById('messages').innerText = '';
+        const errors = document.querySelectorAll('span.error');
+        for (const el of errors) {
+            el.remove();
+        }
         var xhr = new XMLHttpRequest();
-        xhr.open('POST', 'processors/login.processor.php', true);
+        xhr.open('POST', '?a=0', true);
         xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded;');
         xhr.onload = function() {
-            if(this.readyState === 4) {
+            if (this.readyState === 4) {
                 var header = this.response.substr(0, 9);
-                if(header.toLowerCase() === 'location:') {
+                if (header.toLowerCase() === 'location:') {
                     window.location = this.response.substr(10);
                 } else {
                     var cimg = document.getElementById('captcha_image');
-                    if(cimg) cimg.src = 'captcha.php?rand=' + Math.random();
-                    form.submitButton.classList.remove('scaleX');
-                    alert(this.response);
+                    if (cimg) cimg.src = 'captcha.php?rand=' + Math.random();
+                    document.getElementById('mainloader').classList.remove('show');
+                    document.getElementById('messages').innerText = this.response;
                 }
             }
         };
-        xhr.send('ajax=1&username=' + encodeURIComponent(form.username.value) + '&password=' + encodeURIComponent(form.password.value) + (form.captcha_code ? '&captcha_code=' + encodeURIComponent(form.captcha_code.value) : ''));
+        xhr.send('ajax=1&_token=' + encodeURIComponent(form._token.value) + '&username=' + encodeURIComponent(form.username.value) + '&password=' + encodeURIComponent(form.password.value) + (form.captcha_code ? '&captcha_code=' + encodeURIComponent(form.captcha_code.value) : '') + '&rememberme=' + form.rememberme.value);
         e.preventDefault();
     }
     /* ]]> */

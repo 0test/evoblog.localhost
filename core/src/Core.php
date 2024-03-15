@@ -4602,6 +4602,8 @@ class Core extends AbstractLaravel implements Interfaces\CoreInterface
             $strTime = date($dateFormat . " H:i:s", $timestamp);
         } elseif ($mode == 'dateOnly') {
             $strTime = date($dateFormat, $timestamp);
+        } elseif ($mode == 'timeOnly') {
+            $strTime = date('H:i:s', $timestamp);
         } elseif ($mode == 'formatOnly') {
             $strTime = $dateFormat;
         }
@@ -5454,13 +5456,18 @@ class Core extends AbstractLaravel implements Interfaces\CoreInterface
      */
     public function stripTags($html, $allowed = '')
     {
-        $t = strip_tags($html, $allowed);
-        $t = preg_replace('~\[\*(.*?)\*\]~', '', $t); //tv
-        $t = preg_replace('~\[\[(.*?)\]\]~', '', $t); //snippet
-        $t = preg_replace('~\[\!(.*?)\!\]~', '', $t); //snippet
-        $t = preg_replace('~\[\((.*?)\)\]~', '', $t); //settings
-        $t = preg_replace('~\[\+(.*?)\+\]~', '', $t); //placeholders
-        $t = preg_replace('~{{(.*?)}}~', '', $t); //chunks
+        if(empty($html)) {
+            $t = '';
+        } else {
+            $t = strip_tags($html, $allowed);
+            $t = preg_replace('~\[\*(.*?)\*\]~', '', $t); //tv
+            $t = preg_replace('~\[\[(.*?)\]\]~', '', $t); //snippet
+            $t = preg_replace('~\[\!(.*?)\!\]~', '', $t); //snippet
+            $t = preg_replace('~\[\((.*?)\)\]~', '', $t); //settings
+            $t = preg_replace('~\[\+(.*?)\+\]~', '', $t); //placeholders
+            $t = preg_replace('~{{(.*?)}}~', '', $t); //chunks
+        }
+
         return $t;
     }
 

@@ -131,13 +131,6 @@ class SiteContent extends Eloquent\Model
     protected $softDelete = true;
 
     /**
-     * Indicates if the model should be timestamped.
-     *
-     * @var bool
-     */
-    public $timestamps = false;
-
-    /**
      * Entity constructor.
      *
      * @param array $attributes
@@ -155,9 +148,7 @@ class SiteContent extends Eloquent\Model
         'searchable' => 'int',
         'cacheable' => 'int',
         'createdby' => 'int',
-        'createdon' => 'int',
         'editedby' => 'int',
-        'editedon' => 'int',
         'deleted' => 'int',
         'deletedby' => 'int',
         'publishedon' => 'int',
@@ -200,7 +191,6 @@ class SiteContent extends Eloquent\Model
         parent::boot();
 
         static::updating(static function (SiteContent $entity) {
-            $entity->editedon = time();
             $entity->editedby = evolutionCMS()->getLoginUserID();
         });
 
@@ -214,7 +204,6 @@ class SiteContent extends Eloquent\Model
         });
 
         static::creating(static function (SiteContent $entity) {
-            $entity->createdon = time();
             $entity->createdby = evolutionCMS()->getLoginUserID();
         });
         // When entity is created, the appropriate
@@ -229,7 +218,7 @@ class SiteContent extends Eloquent\Model
             $entity->closure->insertNode($ancestor, $descendant);
         });
 
-        static::saved(static function (SiteContent $entity) {
+        static::updated(static function (SiteContent $entity) {
             $parentIdChanged = $entity->isDirty($entity->getParentIdColumn());
 
             if ($parentIdChanged || $entity->isDirty($entity->getPositionColumn())) {
@@ -428,7 +417,8 @@ class SiteContent extends Eloquent\Model
             ->where(function (Eloquent\Builder $query) use ($time) {
                 $query->where('unpub_date', '>', $time)
                     ->orWhere('unpub_date', '=', 0);
-            })->where('published', '=', 0);
+            })
+            ->where('published', '=', 0);
     }
 
     /**
@@ -2069,7 +2059,7 @@ class SiteContent extends Eloquent\Model
             if (EvolutionCMS()->isFrontend()) {
                 $query->where('privateweb', 0);
             } else {
-                $query->whereRaw("1 = {$_SESSION['mgrRole']}");
+                $query->whereRaw('1 = ' . ($_SESSION['mgrRole'] ?? 0));
                 $query->orWhere('site_content.privatemgr', 0);
             }
             if ($docgrp) {

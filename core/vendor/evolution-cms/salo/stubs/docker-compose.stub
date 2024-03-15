@@ -3,11 +3,11 @@ version: '3'
 services:
     evo.php:
         build:
-            context: core/vendor/evolution-cms/salo/runtimes/8.0
+            context: core/vendor/evolution-cms/salo/runtimes/8.2
             dockerfile: Dockerfile
             args:
                 WWWGROUP: '${WWWGROUP}'
-        image: php:8.0-apache
+        image: php:8.2-apache
         ports:
             - '${APP_PORT:-80}:80'
         environment:

@@ -20,6 +20,8 @@ use Composer\IO\IOInterface;
 use Composer\Composer;
 use Composer\PartialComposer;
 use Composer\Pcre\Preg;
+use Composer\Plugin\CommandEvent;
+use Composer\Plugin\PreCommandRunEvent;
 use Composer\Util\Platform;
 use Composer\DependencyResolver\Operation\OperationInterface;
 use Composer\Repository\RepositoryInterface;
@@ -180,6 +182,10 @@ class EventDispatcher
             $details = null;
             if ($event instanceof PackageEvent) {
                 $details = (string) $event->getOperation();
+            } elseif ($event instanceof CommandEvent) {
+                $details = $event->getCommandName();
+            } elseif ($event instanceof PreCommandRunEvent) {
+                $details = $event->getCommand();
             }
             $this->io->writeError('Dispatching <info>'.$event->getName().'</info>'.($details ? ' ('.$details.')' : '').' event');
         }
@@ -194,6 +200,7 @@ class EventDispatcher
                 $return = 0;
                 $this->ensureBinDirIsInPath();
 
+                $formattedEventNameWithArgs = $event->getName() . ($event->getArguments() !== [] ? ' (' . implode(', ', $event->getArguments()) . ')' : '');
                 if (!is_string($callable)) {
                     if (!is_callable($callable)) {
                         $className = is_object($callable[0]) ? get_class($callable[0]) : $callable[0];
@@ -201,11 +208,11 @@ class EventDispatcher
                         throw new \RuntimeException('Subscriber '.$className.'::'.$callable[1].' for event '.$event->getName().' is not callable, make sure the function is defined and public');
                     }
                     if (is_array($callable) && (is_string($callable[0]) || is_object($callable[0])) && is_string($callable[1])) {
-                        $this->io->writeError(sprintf('> %s: %s', $event->getName(), (is_object($callable[0]) ? get_class($callable[0]) : $callable[0]).'->'.$callable[1]), true, IOInterface::VERBOSE);
+                        $this->io->writeError(sprintf('> %s: %s', $formattedEventNameWithArgs, (is_object($callable[0]) ? get_class($callable[0]) : $callable[0]).'->'.$callable[1]), true, IOInterface::VERBOSE);
                     }
                     $return = false === $callable($event) ? 1 : 0;
                 } elseif ($this->isComposerScript($callable)) {
-                    $this->io->writeError(sprintf('> %s: %s', $event->getName(), $callable), true, IOInterface::VERBOSE);
+                    $this->io->writeError(sprintf('> %s: %s', $formattedEventNameWithArgs, $callable), true, IOInterface::VERBOSE);
 
                     $script = explode(' ', substr($callable, 1));
                     $scriptName = $script[0];
@@ -277,6 +284,9 @@ class EventDispatcher
 
                     $app = new Application();
                     $app->setCatchExceptions(false);
+                    if (method_exists($app, 'setCatchErrors')) {
+                        $app->setCatchErrors(false);
+                    }
                     $app->setAutoExit(false);
                     $cmd = new $className($event->getName());
                     $app->add($cmd);
@@ -351,6 +361,14 @@ class EventDispatcher
                         if ($matched && !file_exists($match[0])) {
                             $finder = new ExecutableFinder;
                             if ($pathToExec = $finder->find($match[0])) {
+                                if (Platform::isWindows()) {
+                                    $execWithoutExt = Preg::replace('{\.(exe|bat|cmd|com)$}i', '', $pathToExec);
+                                    // prefer non-extension file if it exists when executing with PHP
+                                    if (file_exists($execWithoutExt)) {
+                                        $pathToExec = $execWithoutExt;
+                                    }
+                                    unset($execWithoutExt);
+                                }
                                 $pathAndArgs = $pathToExec . substr($pathAndArgs, strlen($match[0]));
                             }
                         }

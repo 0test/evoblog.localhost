@@ -11,6 +11,16 @@
             }
           };
         </script>
+        <style>
+            .deletedNode a {
+                color: #a52a2a;
+                text-decoration: line-through;
+            }
+            .unpublishedNode a {
+                color: #818a91;
+                font-style: italic;
+            }
+        </style>
     @endpush
 
     <h1>
@@ -22,6 +32,7 @@
     <div class="tab-page">
         <div class="container container-body">
             <form name="searchform" method="post" action="index.php" enctype="multipart/form-data" class="form-group">
+                @csrf
                 <input type="hidden" name="a" value="71">
 
                 <div class="row form-row">
